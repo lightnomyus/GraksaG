@@ -1,15 +1,50 @@
 import QtQuick 2.0
 import QtDataVisualization 1.2
+import QtQuick.Controls 1.4
+
 
 Item {
+    id: root
     property alias scatter_element: data1_model
 
     Rectangle{
         id: placeholder_setting
+        width: root.width
+        height: 0.1*root.height
+
+        Button{
+            anchors.left: parent.left
+            id: button_shadow
+            height: parent.height
+            width: 1/3 * parent.width
+            text: "Shadow Toggle"
+        }
+
+        Button{
+            anchors.left: button_shadow.right
+            id: button_view
+            height: parent.height
+            width: 1/3 * parent.width
+            text: "View Toggle"
+        }
+
+        Button{
+            anchors.left: button_view.right
+            id: button_theme
+            height: parent.height
+            width: 1/3 * parent.width
+            text: "Theme Toggle"
+        }
+
+
     }
 
     Rectangle{
         id: placeholder_graph
+        width: root.width
+        anchors.top: placeholder_setting.bottom
+        anchors.topMargin: 10
+        anchors.bottom: parent.bottom
 
         Scatter3D {
             width: parent.width
