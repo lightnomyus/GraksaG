@@ -10,6 +10,7 @@ Window {
 
 
 
+
     Rectangle {
         id: rectangle
         x: 8

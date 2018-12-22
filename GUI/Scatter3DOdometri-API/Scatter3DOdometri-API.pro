@@ -1,5 +1,4 @@
-QT += quick
-QT += datavisualization
+QT += quick datavisualization gui qml
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use

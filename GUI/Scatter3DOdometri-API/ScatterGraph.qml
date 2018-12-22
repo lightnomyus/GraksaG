@@ -18,6 +18,13 @@ Item {
             height: parent.height
             width: 1/3 * parent.width
             text: "Shadow Toggle"
+            onClicked: {
+                if(scatter3D_id.shadowQuality == AbstractGraph3D.ShadowQualityNone){
+                    scatter3D_id.shadowQuality = AbstractGraph3D.ShadowQualitySoftHigh
+                }else{
+                    scatter3D_id.shadowQuality = AbstractGraph3D.ShadowQualityNone
+                }
+            }
         }
 
         Button{
@@ -26,6 +33,15 @@ Item {
             height: parent.height
             width: 1/3 * parent.width
             text: "View Toggle"
+            onClicked: {
+                if (scatter3D_id.scene.activeCamera.cameraPreset === Camera3D.CameraPresetFront) {
+                    scatter3D_id.scene.activeCamera.cameraPreset = Camera3D.CameraPresetFrontHigh;
+                } else if (scatter3D_id.scene.activeCamera.cameraPreset === Camera3D.CameraPresetFrontHigh) {
+                    scatter3D_id.scene.activeCamera.cameraPreset = Camera3D.CameraPresetIsometricRightHigh;
+                } else {
+                    scatter3D_id.scene.activeCamera.cameraPreset = Camera3D.CameraPresetFront;
+                }
+            }
         }
 
         Button{
@@ -34,6 +50,15 @@ Item {
             height: parent.height
             width: 1/3 * parent.width
             text: "Theme Toggle"
+            onClicked: {
+                if (scatter3D_id.theme.type === Theme3D.ThemeRetro) {
+                    scatter3D_id.theme.type = Theme3D.ThemeArmyBlue
+                } else if (scatter3D_id.theme.type === Theme3D.ThemeArmyBlue) {
+                    scatter3D_id.theme.type = Theme3D.ThemeDigia
+                } else {
+                    scatter3D_id.theme.type = Theme3D.ThemeRetro
+                }
+            }
         }
 
 
@@ -46,7 +71,8 @@ Item {
         anchors.topMargin: 10
         anchors.bottom: parent.bottom
 
-        Scatter3D {
+        Scatter3D {  
+            id: scatter3D_id
             width: parent.width
             height: parent.height
             scene.activeCamera: Camera3D{cameraPreset: Camera3D.CameraPresetFront}
