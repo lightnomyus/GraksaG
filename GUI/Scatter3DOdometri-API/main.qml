@@ -96,7 +96,7 @@ Rectangle {
         x: 422
         y: 415
         text: qsTr("ADD")
-        onPressed: scatter_graph.scatter_element.append({xPos: spinBox.value, yPos: spinBox1.value, zPos: spinBox2.value})
+        onPressed: obj_testerScatter3D.send_Data(spinBox.value,spinBox1.value,spinBox2.value) //scatter_graph.scatter_element.append({xPos: spinBox.value, yPos: spinBox1.value, zPos: spinBox2.value})
     }
 
     Button {
@@ -106,6 +106,4 @@ Rectangle {
         text: qsTr("CLEAR")
         onPressed: scatter_graph.scatter_element.clear()
     }
-
-
 }

@@ -4,13 +4,13 @@ import QtQuick.Controls 1.4
 
 
 Item {
-    id: root
+    id: scatterGraph_root
     property alias scatter_element: data1_model
 
     Rectangle{
         id: placeholder_setting
-        width: root.width
-        height: 0.1*root.height
+        width: scatterGraph_root.width
+        height: 0.1*scatterGraph_root.height
 
         Button{
             anchors.left: parent.left
@@ -66,7 +66,7 @@ Item {
 
     Rectangle{
         id: placeholder_graph
-        width: root.width
+        width: scatterGraph_root.width
         anchors.top: placeholder_setting.bottom
         anchors.topMargin: 10
         anchors.bottom: parent.bottom
@@ -98,6 +98,11 @@ Item {
 
         ListModel{
             id: data1_model
+        }
+
+        Connections{
+            target: obj_Scatter3D
+            onUpdate_UI: data1_model.append({xPos: xPos, yPos: yPos, zPos: zPos})
         }
 
     }

@@ -1,4 +1,4 @@
-QT += quick datavisualization gui qml
+QT += quick datavisualization gui qml core
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -14,7 +14,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    api_scatter3d.cpp
+    api_scatter3d.cpp \
+    tester_scatter3d.cpp
 
 RESOURCES += qml.qrc
 
@@ -30,4 +31,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    api_scatter3d.h
+    api_scatter3d.h \
+    tester_scatter3d.h \
+    type_definition.h
