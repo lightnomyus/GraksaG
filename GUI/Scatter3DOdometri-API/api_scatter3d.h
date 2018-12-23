@@ -11,7 +11,7 @@ public:
     explicit API_Scatter3D(QObject *parent = nullptr);
 
 signals:
-    void update_UI(position3D_t xPos, position3D_t yPos, position3D_t zPos);
+    void update_UI(float xPos, float yPos, float zPos);
 
 public slots:
     void receive_Data3DPosition(position3D_t xPos, position3D_t yPos, position3D_t zPos);

@@ -16,7 +16,7 @@ Item {
             anchors.left: parent.left
             id: button_shadow
             height: parent.height
-            width: 1/3 * parent.width
+            width: 1/4 * parent.width
             text: "Shadow Toggle"
             onClicked: {
                 if(scatter3D_id.shadowQuality == AbstractGraph3D.ShadowQualityNone){
@@ -31,7 +31,7 @@ Item {
             anchors.left: button_shadow.right
             id: button_view
             height: parent.height
-            width: 1/3 * parent.width
+            width: 1/4 * parent.width
             text: "View Toggle"
             onClicked: {
                 if (scatter3D_id.scene.activeCamera.cameraPreset === Camera3D.CameraPresetFront) {
@@ -48,7 +48,7 @@ Item {
             anchors.left: button_view.right
             id: button_theme
             height: parent.height
-            width: 1/3 * parent.width
+            width: 1/4 * parent.width
             text: "Theme Toggle"
             onClicked: {
                 if (scatter3D_id.theme.type === Theme3D.ThemeRetro) {
@@ -59,6 +59,15 @@ Item {
                     scatter3D_id.theme.type = Theme3D.ThemeRetro
                 }
             }
+        }
+
+        Button{
+            anchors.left: button_theme.right
+            id: button_clear
+            height: parent.height
+            width: 1/4 * parent.width
+            text: "Clear Scatter"
+            onClicked: data1_model.clear()
         }
 
 
@@ -102,7 +111,7 @@ Item {
 
         Connections{
             target: obj_Scatter3D
-            onUpdate_UI: data1_model.append({xPos: xPos, yPos: yPos, zPos: zPos})
+            onUpdate_UI: data1_model.append({"xPos": xPos, "yPos": yPos, "zPos": zPos})
         }
 
     }
