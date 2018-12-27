@@ -1,6 +1,4 @@
-QT += quick
-QT += serialport
-QT += core
+QT += quick serialport core
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
