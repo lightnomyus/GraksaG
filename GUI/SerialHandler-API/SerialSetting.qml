@@ -3,46 +3,58 @@ import QtQuick.Controls 2.3
 
 Item {
     id: root_SerialSetting
-    anchors.fill: parent
+    width: placeholder.width
+    height: placeholder.height
 
+    Connections{
+        target: obj_SerialHandler
+        onUpdate_UI: {
+
+            comboBox_port.model = ["shit","got","real"];
+            console.log(["shit","got","real"]);
+            console.log(list);
+        }
+    }
 
     Rectangle{
         id: placeholder
-        anchors.fill: parent
+        width: 369
+        height: 347
+
+        ComboBox {
+            id: comboBox_port
+            x: 201
+            y: 29
+        }
 
         ComboBox {
             id: comboBox_baud
             x: 201
-            y: 38
-
-            Connections{
-                target: obj_SerialHandler
-                onUpdate_UI: comboBox_baud.model = list
-            }
+            y: 76
         }
 
         ComboBox {
             id: comboBox1_databits
             x: 201
-            y: 84
+            y: 123
         }
 
         ComboBox {
             id: comboBox2_parity
             x: 201
-            y: 130
+            y: 169
         }
 
         ComboBox {
             id: comboBox3_stopbits
             x: 201
-            y: 176
+            y: 215
         }
 
         Button {
             id: button
             x: 125
-            y: 239
+            y: 278
             text: qsTr("Connect")
             onPressed: obj_SerialHandler.open_serial()
         }
@@ -50,21 +62,23 @@ Item {
         Button {
             id: button1
             x: 241
-            y: 238
+            y: 277
             text: qsTr("Disconnect")
+            onPressed: obj_SerialHandler.close_serial()
         }
 
         Button {
             id: button2
             x: 9
-            y: 240
+            y: 279
             text: qsTr("Scan")
+            onPressed: obj_SerialHandler.scan_serial()
         }
 
         Label {
             id: label
             x: 44
-            y: 38
+            y: 77
             width: 109
             height: 40
             text: qsTr("Baud Rate")
@@ -77,7 +91,7 @@ Item {
         Label {
             id: label1
             x: 44
-            y: 84
+            y: 123
             width: 109
             height: 40
             text: qsTr("Data Bits")
@@ -90,7 +104,7 @@ Item {
         Label {
             id: label2
             x: 44
-            y: 130
+            y: 169
             width: 109
             height: 40
             text: qsTr("Parity")
@@ -103,12 +117,25 @@ Item {
         Label {
             id: label3
             x: 44
-            y: 176
+            y: 215
             width: 109
             height: 40
             text: qsTr("Stop Bits")
             fontSizeMode: Text.FixedSize
             font.pointSize: 10
+            horizontalAlignment: Text.AlignLeft
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        Label {
+            id: label4
+            x: 44
+            y: 29
+            width: 109
+            height: 40
+            text: qsTr("Select Port")
+            font.pointSize: 10
+            fontSizeMode: Text.FixedSize
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
         }

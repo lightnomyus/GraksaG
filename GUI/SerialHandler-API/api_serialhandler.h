@@ -13,11 +13,11 @@ public:
     Q_INVOKABLE void open_serial();
     Q_INVOKABLE void close_serial();
     Q_INVOKABLE void scan_serial();
-//    Q_INVOKABLE void set_serial(QSerialPort selected);
-//    Q_INVOKABLE void set_baud(qint32 baud);
-//    Q_INVOKABLE void set_databits(int databits);
-//    Q_INVOKABLE void set_parity(int parity);
-//    Q_INVOKABLE void set_stopbits(int stopbits);
+    Q_INVOKABLE void set_serial(QString selected);
+    Q_INVOKABLE void set_baud(qint32 baud);
+    Q_INVOKABLE void set_databits(int databits);
+    Q_INVOKABLE void set_parity(int parity);
+    Q_INVOKABLE void set_stopbits(int stopbits);
 
 signals:
     void message_SerialHandler(QString message);
@@ -35,7 +35,7 @@ private:
     bool m_isActive;
     QSerialPort m_serial;
     QList<QSerialPortInfo> m_infos;
-    QList<QString> m_list;
+    QStringList m_list;
     QByteArray m_data;
 };
 

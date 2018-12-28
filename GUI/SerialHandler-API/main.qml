@@ -14,9 +14,11 @@ Rectangle {
 
     Rectangle{
         anchors.left: hahaha.right
-        width: 90
-        height: 90
+        width: 271
+        height: 316
+        color: "#e7afaf"
         Terminal{
+            anchors.fill: parent
         }
     }
 
