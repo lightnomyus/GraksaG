@@ -13,10 +13,11 @@ void API_SerialHandler::open_serial()
 {
     if (!m_isActive) {
         m_serial.open(QIODevice::ReadWrite);
+        m_isActive = true;
         m_message = "SUCCED: Koneksi serial baru berhasil dibuat.";
         emit message_SerialHandler(m_message);
     } else {
-        m_message = "FAILED: Putuskan koneksi serial terlebih dahulu sebelum membuat koneksi serial baru.";
+        m_message = "FAILED: Putuskan koneksi saat ini terlebih dahulu.";
         emit message_SerialHandler(m_message);
     }
 }
@@ -25,6 +26,7 @@ void API_SerialHandler::close_serial()
 {
     if (m_isActive) {
         m_serial.close();
+        m_isActive = false;
         m_message = "SUCCED: Koneksi serial berhasil diputuskan.";
         emit message_SerialHandler(m_message);
     } else {
@@ -45,7 +47,7 @@ void API_SerialHandler::scan_serial()
         m_message = "SUCCED: Scanning serial port selesai.";
         emit message_SerialHandler(m_message);
     } else {
-        m_message = "FAILED: Scanning bisa dimulai ketika semua koneksi serikal dimatikan.";
+        m_message = "FAILED: Putuskan koneksi saat ini terlebih dahulu.";
         emit message_SerialHandler(m_message);
     }
 }
@@ -57,6 +59,8 @@ void API_SerialHandler::set_serial(QString selected)
         while (selected != m_infos[i].portName()) {
             i++;
         }
+        m_message = "SUCCED: Port berhasil diset.";
+        emit message_SerialHandler(m_message);
         m_serial.setPort(m_infos[i]);
     } else {
         m_message = "FAILED: Putuskan koneksi saat ini terlebih dahulu.";
@@ -120,11 +124,9 @@ void API_SerialHandler::set_stopbits(int stopbits)
 
 void API_SerialHandler::update_list()
 {
-    m_list.clear();
     for (int i= 0 ; i<m_infos.count() ; i++) {
-        m_list.append(m_infos[i].portName());
+        emit update_UI(m_infos[i].portName());
     }
-    emit update_UI(m_list);
 }
 
 void API_SerialHandler::read_DataBytes()

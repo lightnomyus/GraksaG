@@ -23,7 +23,7 @@ signals:
     void message_SerialHandler(QString message);
     void send_DataByte(QByteArray data);
     void changed_list();
-    void update_UI(QList<QString> list);
+    void update_UI(QString port_name);
 
 public slots:
     void read_DataBytes();
@@ -35,7 +35,6 @@ private:
     bool m_isActive;
     QSerialPort m_serial;
     QList<QSerialPortInfo> m_infos;
-    QStringList m_list;
     QByteArray m_data;
 };
 

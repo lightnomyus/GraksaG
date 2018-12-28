@@ -9,10 +9,8 @@ Item {
     Connections{
         target: obj_SerialHandler
         onUpdate_UI: {
-
-            comboBox_port.model = ["shit","got","real"];
-            console.log(["shit","got","real"]);
-            console.log(list);
+            model_port.clear()
+            model_port.append({port : port_name})
         }
     }
 
@@ -25,12 +23,33 @@ Item {
             id: comboBox_port
             x: 201
             y: 29
+            textRole: "port"
+            model: ListModel{
+                id: model_port
+                dynamicRoles: true
+            }
+            onActivated: obj_SerialHandler.set_serial(currentText.toString())
         }
 
         ComboBox {
             id: comboBox_baud
             x: 201
             y: 76
+            model: ["9600","19200","38400","57600","115200"]
+            onActivated: {
+                console.log(index);
+                if (index == 0){
+                    obj_SerialHandler.set_baud(9600)
+                } else if (index == 1){
+                    obj_SerialHandler.set_baud(19200)
+                } else if (index == 2){
+                    obj_SerialHandler.set_baud(38400)
+                } else if (index == 3){
+                    obj_SerialHandler.set_baud(57600)
+                } else if (index == 4){
+                    obj_SerialHandler.set_baud(115200)
+                }
+            }
         }
 
         ComboBox {

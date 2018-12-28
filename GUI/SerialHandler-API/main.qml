@@ -13,12 +13,15 @@ Rectangle {
     }
 
     Rectangle{
-        anchors.left: hahaha.right
-        width: 271
-        height: 316
-        color: "#e7afaf"
+        x: 8
+        y: 327
+        width: 624
+        height: 145
+        color: "#000000"
+
         Terminal{
             anchors.fill: parent
+
         }
     }
 
