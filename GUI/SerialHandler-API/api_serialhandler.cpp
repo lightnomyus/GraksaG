@@ -1,21 +1,24 @@
 #include "api_serialhandler.h"
-#include <QtDebug>
 
 API_SerialHandler::API_SerialHandler(QObject *parent) : QObject(parent)
 {
     m_isActive = false;
-    connect(this,SIGNAL(changed_list()),this,SLOT(update_list()));
+    connect(this,SIGNAL(changed_List()),this,SLOT(update_List()));
     connect(&m_serial,SIGNAL(readyRead()),this,SLOT(read_DataBytes()));
-
 }
 
 void API_SerialHandler::open_serial()
 {
     if (!m_isActive) {
-        m_serial.open(QIODevice::ReadWrite);
-        m_isActive = true;
-        m_message = "SUCCED: Koneksi serial baru berhasil dibuat.";
-        emit message_SerialHandler(m_message);
+        if (m_infos.count() != 0) {
+            m_serial.open(QIODevice::ReadWrite);
+            m_isActive = true;
+            m_message = "SUCCED: Koneksi serial baru berhasil dibuat.";
+            emit message_SerialHandler(m_message);
+        } else {
+            m_message = "FAILED: Tidak ada port yang tersedia.";
+            emit message_SerialHandler(m_message);
+        }
     } else {
         m_message = "FAILED: Putuskan koneksi saat ini terlebih dahulu.";
         emit message_SerialHandler(m_message);
@@ -40,10 +43,14 @@ void API_SerialHandler::scan_serial()
     if (!m_isActive) {
         m_infos.clear();
         auto infos = QSerialPortInfo::availablePorts();
-        for (int i = 0; i < infos.count(); i++) {
-            m_infos.append(infos[i]);
+        if (infos.count() != 0) {
+            for (int i = 0; i < infos.count(); i++) {
+                m_infos.append(infos[i]);
+            }
+            emit changed_List();
+        } else {
+            emit update_UI("zero");
         }
-        emit changed_list();
         m_message = "SUCCED: Scanning serial port selesai.";
         emit message_SerialHandler(m_message);
     } else {
@@ -122,7 +129,7 @@ void API_SerialHandler::set_stopbits(int stopbits)
 
 // SLOT
 
-void API_SerialHandler::update_list()
+void API_SerialHandler::update_List()
 {
     for (int i= 0 ; i<m_infos.count() ; i++) {
         emit update_UI(m_infos[i].portName());
@@ -131,8 +138,11 @@ void API_SerialHandler::update_list()
 
 void API_SerialHandler::read_DataBytes()
 {
-    m_data = m_serial.readAll();
-    emit send_DataByte(m_data);
+    if (m_serial.bytesAvailable()>=BYTES_PER_READ) {
+        m_data = m_serial.read(BYTES_PER_READ);
+        emit send_DataByte(m_data);
+    }
+
 }
 
 void API_SerialHandler::write_DataBytes(QByteArray data)

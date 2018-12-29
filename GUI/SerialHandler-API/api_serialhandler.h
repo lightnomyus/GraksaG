@@ -1,6 +1,8 @@
 #ifndef API_SERIALHANDLER_H
 #define API_SERIALHANDLER_H
 
+#define BYTES_PER_READ 1
+
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QList>
@@ -22,13 +24,13 @@ public:
 signals:
     void message_SerialHandler(QString message);
     void send_DataByte(QByteArray data);
-    void changed_list();
+    void changed_List();
     void update_UI(QString port_name);
 
 public slots:
     void read_DataBytes();
     void write_DataBytes(QByteArray data);
-    void update_list();
+    void update_List();
 
 private:
     QString m_message;

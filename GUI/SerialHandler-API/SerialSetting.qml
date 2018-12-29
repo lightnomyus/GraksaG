@@ -9,8 +9,12 @@ Item {
     Connections{
         target: obj_SerialHandler
         onUpdate_UI: {
-            model_port.clear()
-            model_port.append({port : port_name})
+            if (port_name != "zero") {
+                model_port.clear()
+                model_port.append({port : port_name})
+            } else {
+                model_port.clear()
+            }
         }
     }
 
@@ -37,7 +41,6 @@ Item {
             y: 76
             model: ["9600","19200","38400","57600","115200"]
             onActivated: {
-                console.log(index);
                 if (index == 0){
                     obj_SerialHandler.set_baud(9600)
                 } else if (index == 1){
@@ -53,21 +56,51 @@ Item {
         }
 
         ComboBox {
-            id: comboBox1_databits
+            id: comboBox_databits
             x: 201
             y: 123
+            model: ["5","6","7","8"]
+            onActivated: {
+                if (index == 0){
+                    obj_SerialHandler.set_databits(5)
+                } else if (index == 1){
+                    obj_SerialHandler.set_databits(6)
+                } else if (index == 2){
+                    obj_SerialHandler.set_databits(7)
+                } else if (index == 3){
+                    obj_SerialHandler.set_databits(8)
+                }
+            }
         }
 
         ComboBox {
-            id: comboBox2_parity
+            id: comboBox_parity
             x: 201
             y: 169
+            model: ["No Parity","Odd Parity","Even Parity"]
+            onActivated: {
+                if (index == 0){
+                    obj_SerialHandler.set_parity(0)
+                } else if (index == 1){
+                    obj_SerialHandler.set_parity(1)
+                } else if (index == 2){
+                    obj_SerialHandler.set_parity(2)
+                }
+            }
         }
 
         ComboBox {
-            id: comboBox3_stopbits
+            id: comboBox_stopbits
             x: 201
             y: 215
+            model: ["1","2"]
+            onActivated: {
+                if (index == 0){
+                    obj_SerialHandler.set_stopbits(1)
+                } else if (index == 1){
+                    obj_SerialHandler.set_stopbits(2)
+                }
+            }
         }
 
         Button {
@@ -163,3 +196,4 @@ Item {
 
 
 }
+
