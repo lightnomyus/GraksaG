@@ -53,8 +53,8 @@ Item {
 
 
     Connections{
-        target: obj_SerialHandler
-        onMessage_SerialHandler: {
+        target: obj_Terminal
+        onUpdate_UI: {
             model_terminal.append({message:message});
         }
     }

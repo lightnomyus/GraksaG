@@ -6,7 +6,7 @@ Rectangle {
     id: root
     visible: true
     width: 640
-    height: 480
+    height: 535
 
     SerialSetting{
         id: hahaha
@@ -16,8 +16,7 @@ Rectangle {
         x: 8
         y: 327
         width: 624
-        height: 145
-        color: "#000000"
+        height: 200
 
         Terminal{
             anchors.fill: parent

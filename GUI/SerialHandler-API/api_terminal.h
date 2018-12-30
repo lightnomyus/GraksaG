@@ -10,8 +10,10 @@ public:
     explicit API_Terminal(QObject *parent = nullptr);
 
 signals:
+    void update_UI(QString message);
 
 public slots:
+    void receive_Message(QString message);
 };
 
 #endif // API_TERMINAL_H

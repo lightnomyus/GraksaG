@@ -3,18 +3,24 @@
 API_SerialHandler::API_SerialHandler(QObject *parent) : QObject(parent)
 {
     m_isActive = false;
-    connect(this,SIGNAL(changed_List()),this,SLOT(update_List()));
-    connect(&m_serial,SIGNAL(readyRead()),this,SLOT(read_DataBytes()));
+    connect(this,&API_SerialHandler::changed_List,this,&API_SerialHandler::update_List);
+    connect(&m_serial,&QSerialPort::readyRead,this,&API_SerialHandler::read_DataBytes);
+//    connect(this,SIGNAL(changed_List()),this,SLOT(update_List()));
+//    connect(&m_serial,SIGNAL(readyRead()),this,SLOT(read_DataBytes()));
 }
 
 void API_SerialHandler::open_serial()
 {
     if (!m_isActive) {
         if (m_infos.count() != 0) {
-            m_serial.open(QIODevice::ReadWrite);
-            m_isActive = true;
-            m_message = "SUCCED: Koneksi serial baru berhasil dibuat.";
-            emit message_SerialHandler(m_message);
+            if (m_serial.open(QIODevice::ReadWrite)) {
+                m_isActive = true;
+                m_message = "SUCCED: Koneksi serial baru berhasil dibuat.";
+                emit message_SerialHandler(m_message);
+            } else {
+                m_message = "FAILED: Gagal membuat koneksi, silakan scan lagi port anda.";
+                emit message_SerialHandler(m_message);
+            }
         } else {
             m_message = "FAILED: Tidak ada port yang tersedia.";
             emit message_SerialHandler(m_message);
@@ -141,6 +147,7 @@ void API_SerialHandler::read_DataBytes()
     if (m_serial.bytesAvailable()>=BYTES_PER_READ) {
         m_data = m_serial.read(BYTES_PER_READ);
         emit send_DataByte(m_data);
+        emit message_SerialHandler(m_data);
     }
 
 }

@@ -5,6 +5,8 @@ Item {
     id: root_SerialSetting
     width: placeholder.width
     height: placeholder.height
+    property alias rec_SerialSet: placeholder
+
 
     Connections{
         target: obj_SerialHandler
@@ -20,8 +22,9 @@ Item {
 
     Rectangle{
         id: placeholder
-        width: 369
-        height: 347
+        anchors.centerIn: parent
+        width: 361
+        height: 345
 
         ComboBox {
             id: comboBox_port
