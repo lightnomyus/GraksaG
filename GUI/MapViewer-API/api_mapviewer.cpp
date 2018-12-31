@@ -23,7 +23,6 @@ void API_MapViewer::set_clear()
 {
     if (!m_isClear) {
         m_isClear = true;
-        emit clear_UI();
     }
 }
 

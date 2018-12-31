@@ -6,6 +6,7 @@ import QtQuick.Controls 1.6
 Item {
     id: root_MapViewer
 
+
     Plugin{
         id: mapPlugin
         name: "esri"
@@ -27,6 +28,9 @@ Item {
                 width: 0.25 * parent.width
                 anchors.left: parent.left
                 text: qsTr("Set Home")
+                onPressedChanged: {
+                    obj_MapViewer.set_home()
+                }
             }
 
             Button{
@@ -35,6 +39,13 @@ Item {
                 width: 0.25 * parent.width
                 anchors.left: button_setHome.right
                 text: qsTr("Clear")
+                onPressedChanged: {
+                    id_map.start_tracing = false;
+                    obj_MapViewer.set_clear();
+                    id_map.clearData()
+                    id_map.clearMapItems();
+                    id_map.clearMapParameters()
+                }
             }
 
             Button{
@@ -43,6 +54,7 @@ Item {
                 width: 0.25 * parent.width
                 anchors.left: button_clear.right
                 text: qsTr("Zoom In")
+                onPressedChanged: id_map.zoomLevel += 0.5
             }
 
             Button{
@@ -51,6 +63,7 @@ Item {
                 width: 0.25 * parent.width
                 anchors.left: button_zoomIn.right
                 text: qsTr("Zoom Out")
+                onPressedChanged: id_map.zoomLevel -= 0.5
             }
 
         }
@@ -65,8 +78,58 @@ Item {
                 id: id_map
                 anchors.fill: parent
                 plugin: mapPlugin
-                center: QtPositioning.coordinate(59.91, 10.75) // Oslo
+                property double lon: 0
+                property double lat: 0
+                property bool start_tracing : false
+                property bool add_line: false
+                center: QtPositioning.coordinate(lon, lat)
 
+                MapPolyline{
+                    id:tracer
+                    line.width: 5
+                    line.color: 'green'
+                }
+
+                MapQuickItem{
+                    id: home
+                    zoomLevel: id_map.zoomLevel
+                    anchorPoint.x: circle.width/2
+                    anchorPoint.y: circle.height/2
+                    sourceItem: Rectangle{
+                        id:circle
+                        width: 16
+                        height: 16
+                        radius: 16
+                        color: "red"
+                    }
+
+                }
+
+            }
+
+            Connections{
+                target: obj_MapViewer
+                onUpdate_UI: {
+                    id_map.center = QtPositioning.coordinate(longitude,latitude)
+                    if (isHome) {
+                        id_map.start_tracing = true
+                        home.coordinate = QtPositioning.coordinate(longitude,latitude)
+                        id_map.add_line = true
+                    }
+
+                    if (id_map.start_tracing) {
+                        if (id_map.add_line) {
+                            id_map.addMapItem(tracer)
+                            id_map.addMapItem(home)
+                            id_map.add_line = false
+                            for (var i=tracer.pathLength()-1;i>=0;i--) {
+                                tracer.removeCoordinate(i)
+                            }
+                        }
+
+                        tracer.addCoordinate(QtPositioning.coordinate(longitude,latitude))
+                    }
+                }
             }
         }
 
@@ -75,13 +138,49 @@ Item {
             width: parent.width
             anchors.bottom: parent.bottom
             height: 0.1*parent.height
+
+            Label{
+                id: label_longitude
+                height: parent.height
+                width: 0.25 * parent.width
+                anchors.left: parent.left
+                text: qsTr("Longitude: ")
+                lineHeight: 1
+                fontSizeMode: Text.FixedSize
+                wrapMode: Text.NoWrap
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            Label{
+                id: label_infolon
+                height: parent.height
+                horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignVCenter
+                width: 0.25 * parent.width
+                anchors.left: label_longitude.right
+            }
+
+            Label{
+                id: label_latitude
+                height: parent.height
+                width: 0.25 * parent.width
+                anchors.left: label_infolon.right
+                text: qsTr("Latitude: ")
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            Label{
+                id: label_infolat
+                height: parent.height
+                horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignVCenter
+                width: 0.25 * parent.width
+                anchors.left: label_latitude.right
+            }
         }
 
     }
 
 }
-
-/*##^## Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
- ##^##*/

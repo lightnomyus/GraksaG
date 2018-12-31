@@ -14,7 +14,6 @@ public:
 
 signals:
     void update_UI(double longitude, double latitude, bool isHome);
-    void clear_UI();
     void message_MapViewer(QString message);
 
 public slots:
