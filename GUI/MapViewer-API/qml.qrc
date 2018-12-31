@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MapViewer.qml</file>
+    </qresource>
+</RCC>
