@@ -84,6 +84,8 @@ Item {
                 property bool add_line: false
                 center: QtPositioning.coordinate(lon, lat)
 
+
+
                 MapPolyline{
                     id:tracer
                     line.width: 5
@@ -105,12 +107,21 @@ Item {
 
                 }
 
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        label_infolon.text = qsTr("%1").arg(id_map.toCoordinate(Qt.point(mouse.x,mouse.y)).longitude)
+                        label_infolat.text = qsTr("%1").arg(id_map.toCoordinate(Qt.point(mouse.x,mouse.y)).latitude)
+                    }
+                }
+
             }
 
             Connections{
                 target: obj_MapViewer
                 onUpdate_UI: {
                     id_map.center = QtPositioning.coordinate(longitude,latitude)
+
                     if (isHome) {
                         id_map.start_tracing = true
                         home.coordinate = QtPositioning.coordinate(longitude,latitude)
@@ -129,6 +140,10 @@ Item {
 
                         tracer.addCoordinate(QtPositioning.coordinate(longitude,latitude))
                     }
+
+                    label_infolon.text = qsTr("%1").arg(longitude)
+                    label_infolat.text = qsTr("%2").arg(latitude)
+
                 }
             }
         }
