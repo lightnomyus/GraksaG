@@ -20,6 +20,12 @@ Item {
             onClicked: {
                 id_SplineSeries.clear()
                 id_SplineSeries.add_zero = true
+                id_SplineSeries.add_degree = true
+                id_SplineSeries.name = qsTr("degree")
+                xAxis.min = 0
+                xAxis.max = 1
+                yAxis.min = 0
+                yAxis.max = 1
             }
         }
 
@@ -79,10 +85,26 @@ Item {
             antialiasing: true
             theme: ChartView.ChartThemeQt
 
+            ValueAxis{
+                id: xAxis
+                min: 0
+                max: 1
+            }
+
+            ValueAxis{
+                id: yAxis
+                min: 0
+                max: 1
+            }
+
             SplineSeries{
                 id: id_SplineSeries
                 name: qsTr("degree")
                 property bool add_zero: true
+                property bool add_degree: true
+                axisX: xAxis
+                axisY: yAxis
+
 
             }
         }
@@ -94,7 +116,22 @@ Item {
                     id_SplineSeries.add_zero = false
                     id_SplineSeries.append(0,0)
                 }
-
+                if (xAxis.max <= x) {
+                    xAxis.max = x+1
+                }
+                if (yAxis.max <= y) {
+                    yAxis.max = y+1
+                }
+                if (xAxis.min > x) {
+                    xAxis.min = x-1
+                }
+                if (yAxis.min > y) {
+                    yAxis.min = y-1
+                }
+                if (id_SplineSeries.add_degree) {
+                    id_SplineSeries.add_degree = false
+                    id_SplineSeries.name = qsTr("%1°").arg((180*(Math.atan(y/x))/(Math.PI)).toFixed(2))
+                }
                 id_SplineSeries.append(x,y)
             }
         }

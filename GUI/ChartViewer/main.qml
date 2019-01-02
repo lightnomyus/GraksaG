@@ -1,6 +1,6 @@
-import QtQuick 2.9
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.3
+import QtQuick 2.9
 
 Rectangle {
     id: root
@@ -41,6 +41,20 @@ Rectangle {
         onClicked: {
             obj_TesterChartViewer.send_data(spinBox.value,spinBox1.value)
         }
+    }
+
+    Label {
+        id: label
+        x: 17
+        y: 428
+        text: qsTr("x:")
+    }
+
+    Label {
+        id: label1
+        x: 218
+        y: 428
+        text: qsTr("y:")
     }
 
 
