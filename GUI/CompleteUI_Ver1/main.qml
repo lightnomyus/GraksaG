@@ -14,7 +14,9 @@ Rectangle{
         Button{
             id: button_exit
             anchors.right: parent.right
+            anchors.rightMargin: 1
             anchors.bottom: parent.bottom
+            anchors.bottomMargin: 1
             anchors.top: parent.top
             width: 0.05 * parent.width
             text: "\u274c"
@@ -47,6 +49,8 @@ Rectangle{
 
 //    }
 }
+
+
 
 /*##^## Designer {
     D{i:0;autoSize:true;height:480;width:640}
