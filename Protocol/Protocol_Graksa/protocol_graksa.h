@@ -3,10 +3,10 @@
 
 /*
  * STRUKTUR MESSAGE
- * BYTE 0           Start of Frame
- * BYTE 1-3         Team Identifiacion
- * BYTE 4           Message Identification
- * BYTE 5-n         Payload
+ * BYTE 1           Start of Frame
+ * BYTE 2-4         Team Identifiacion
+ * BYTE 5           Message Identification
+ * BYTE 6-n         Payload
 */
 
 /* Library used */
@@ -33,15 +33,15 @@
 #define GRAKSA_MSG_ID_YAW 15
 
 typedef struct protocol_header {
-    uint8_t SOF = oxd;
-    char Team_ID[3] = "ITB";
+    uint8_t SOF = 0xd;
+    char Team_ID[3] = {'I','T','B'};
     uint8_t Message_ID;
 } protocol_header_t;
 
 typedef struct protocol_message {
     protocol_header_t header;
     uint8_t *payload;
-} protocol_message_t
+} protocol_message_t;
 
 class Protocol_Graksa
 {
@@ -69,8 +69,6 @@ public:
     int8_t deconstruct_MSG_LON(protocol_message_t *input, double *lon);
     int8_t deconstruct_MSG_LAT(protocol_message_t *input, double *lat);
 
-    /* Helper Function */
-    int8_t deconstruct_MSG(protocol_message_t *input, uint8 *output);
 };
 
 #endif // PROTOCOL_GRAKSA_H
