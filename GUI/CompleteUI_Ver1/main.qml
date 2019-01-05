@@ -76,48 +76,90 @@ Rectangle{
                     id: ribbon_layout1
                     anchors.fill: parent
 
-                    GroupBox {
-                        id: groupBox
+                    Rectangle{
+                        Layout.fillHeight: true
                         Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        Layout.bottomMargin: 5
-                        Layout.topMargin: 5
                         Layout.leftMargin: 5
-                        Layout.rightMargin: 5
-                        title: qsTr("Start")
+                        Layout.topMargin: 5
+                        Layout.bottomMargin: 5
+                        color: "#00000000"
+
+                        RowLayout{
+                            width: parent.width
+                            anchors.bottom: label.bottom
+                            anchors.top: parent.top
+
+                            Button{
+                                Layout.margins: 5
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
+                            }
+
+                            Button{
+                                Layout.margins: 5
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
+                            }
+
+                            Button{
+                                Layout.margins: 5
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
+                            }
+
+                            Button{
+                                Layout.margins: 5
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
+                            }
+                        }
+
+
+                        Label {
+                            id: label
+                            anchors.bottom: parent.bottom
+                            width: parent.width
+                            height: parent.height * 0.2
+                            text: qsTr("Label")
+                            wrapMode: Text.WordWrap
+                            fontSizeMode: Text.VerticalFit
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                        }
                     }
 
-                    ToolSeparator {
-                        id: toolSeparator
+                    ToolSeparator{
                         Layout.fillHeight: true
                     }
 
-                    GroupBox {
-                        id: groupBox1
+                    Rectangle{
+                        color: "#00000000"
+                        Layout.fillHeight: true
                         Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        Layout.bottomMargin: 5
-                        Layout.topMargin: 5
-                        Layout.leftMargin: 5
                         Layout.rightMargin: 5
-                        title: qsTr("In Progress")
+                        Layout.topMargin: 5
+                        Layout.bottomMargin: 5
+
+                        RowLayout{
+                            width: parent.width
+                            anchors.bottom: label1.bottom
+                            anchors.top: parent.top
+                        }
+
+                        Label {
+                            id: label1
+                            anchors.bottom: parent.bottom
+                            width: parent.width
+                            height: parent.height * 0.2
+                            text: qsTr("Label")
+                            wrapMode: Text.WordWrap
+                            fontSizeMode: Text.VerticalFit
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                        }
                     }
 
-                    ToolSeparator {
-                        id: toolSeparator1
-                        Layout.fillHeight: true
-                    }
 
-                    GroupBox {
-                        id: groupBox3
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        Layout.bottomMargin: 5
-                        Layout.topMargin: 5
-                        Layout.leftMargin: 5
-                        Layout.rightMargin: 5
-                        title: qsTr("Finish")
-                    }
 
                 }
 
@@ -125,10 +167,22 @@ Rectangle{
 
             Item{
                 Layout.alignment: Qt.AlignCenter
+
+                RowLayout{
+                    id: ribbon_layout2
+                    anchors.fill: parent
+
+                }
             }
 
             Item{
                 Layout.alignment: Qt.AlignCenter
+
+                RowLayout{
+                    id: ribbon_layout3
+                    anchors.fill: parent
+
+                }
 
             }
 
@@ -136,21 +190,75 @@ Rectangle{
 
 
     }
+
+    Rectangle {
+        id: main_content
+        anchors.top: ribbon.bottom
+        anchors.bottom: parent.bottom
+        width: parent.width
+        color: myPalette.dark
+
+        GridLayout{
+            id: content_layout
+            anchors.fill: parent
+
+            columns: 3
+            rows: 5
+
+            GroupBox{
+                title: qsTr("Location and Surveillance")
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.leftMargin: 5
+                Layout.topMargin: 5
+
+            }
+
+            GroupBox{
+                title: qsTr("3D Odometri Position")
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.topMargin: 5
+
+            }
+
+            GroupBox{
+                title: qsTr("Realtime Graph")
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.topMargin: 5
+                Layout.rightMargin: 5
+
+            }
+
+            GroupBox{
+                title: qsTr("Mission Log")
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.leftMargin: 5
+                Layout.bottomMargin: 5
+
+            }
+
+            GroupBox{
+                title: qsTr("Status and Data")
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.bottomMargin: 5
+
+            }
+
+            GroupBox{
+                title: qsTr("3D Attitude Model")
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.bottomMargin: 5
+                Layout.rightMargin: 5
+            }
+
+        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
