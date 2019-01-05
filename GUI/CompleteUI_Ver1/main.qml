@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 
 Rectangle{
     id: root
@@ -12,7 +13,7 @@ Rectangle{
         anchors.left: parent.left
         anchors.right: parent.right
         height: 0.03 * parent.height
-        color: myPalette.dark
+        color: myPalette.light
 
 
         Button{
@@ -31,72 +32,127 @@ Rectangle{
         }
     }
 
-    ToolBar {
-        id: toolBar
+    Rectangle{
+        id: ribbon
+        width: parent.width
         anchors.top: window_header.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
         height: 0.15 * parent.height
+        color: myPalette.alternateBase
 
-        GroupBox {
-            id: groupBox
-            x: 0
-            y: 0
-            width: 216
-            height: 72
-            title: qsTr("Group Box")
+        TabBar {
+            id: tabBar
+            width: parent.width
+            anchors.top: parent.top
+            currentIndex: 0
+
+            TabButton {
+                id: tabButton1
+                text: qsTr("Mission Setting")
+            }
+
+            TabButton {
+                id: tabButton2
+                text: qsTr("Port Setting")
+            }
+
+            TabButton {
+                id: tabButton3
+                text: qsTr("UI Setting")
+            }
+
         }
 
-        ToolSeparator {
-            id: toolSeparator
-            x: 222
-            y: 0
-            width: 13
-            height: 72
+        StackLayout{
+            anchors.top: tabBar.bottom
+            anchors.bottom: parent.bottom
+            width: parent.width
+            currentIndex: tabBar.currentIndex
+
+            Item{
+                id: mission_setup
+                Layout.alignment: Qt.AlignCenter
+
+                RowLayout{
+                    id: ribbon_layout1
+                    anchors.fill: parent
+
+                    GroupBox {
+                        id: groupBox
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        Layout.bottomMargin: 5
+                        Layout.topMargin: 5
+                        Layout.leftMargin: 5
+                        Layout.rightMargin: 5
+                        title: qsTr("Start")
+                    }
+
+                    ToolSeparator {
+                        id: toolSeparator
+                        Layout.fillHeight: true
+                    }
+
+                    GroupBox {
+                        id: groupBox1
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        Layout.bottomMargin: 5
+                        Layout.topMargin: 5
+                        Layout.leftMargin: 5
+                        Layout.rightMargin: 5
+                        title: qsTr("In Progress")
+                    }
+
+                    ToolSeparator {
+                        id: toolSeparator1
+                        Layout.fillHeight: true
+                    }
+
+                    GroupBox {
+                        id: groupBox3
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        Layout.bottomMargin: 5
+                        Layout.topMargin: 5
+                        Layout.leftMargin: 5
+                        Layout.rightMargin: 5
+                        title: qsTr("Finish")
+                    }
+
+                }
+
+            }
+
+            Item{
+                Layout.alignment: Qt.AlignCenter
+            }
+
+            Item{
+                Layout.alignment: Qt.AlignCenter
+
+            }
+
         }
 
-        GroupBox {
-            id: groupBox1
-            x: 241
-            y: 0
-            width: 264
-            height: 72
-            title: qsTr("Group Box")
-        }
-
-        ToolSeparator {
-            id: toolSeparator1
-            x: 511
-            y: 0
-            width: 13
-            height: 72
-        }
 
     }
-
-//    MenuBar{
-//        Menu {
-//            title: qsTr("&File")
-//            Action { text: qsTr("&New...") }
-//            Action { text: qsTr("&Open...") }
-//            Action { text: qsTr("&Save") }
-//            Action { text: qsTr("Save &As...") }
-//            MenuSeparator { }
-//            Action { text: qsTr("&Quit") }
-//        }
-//        Menu {
-//            title: qsTr("&Edit")
-//            Action { text: qsTr("Cu&t") }
-//            Action { text: qsTr("&Copy") }
-//            Action { text: qsTr("&Paste") }
-//        }
-//        Menu {
-//            title: qsTr("&Help")
-//            Action { text: qsTr("&About") }
-//        }
-
-//    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
