@@ -1,6 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>RibbonBox.qml</file>
+        <file>images/icons/newMission.svg</file>
+        <file>images/icons/play-button.svg</file>
+        <file>images/icons/prohibition.svg</file>
+        <file>images/icons/rocket-launch.svg</file>
     </qresource>
 </RCC>
