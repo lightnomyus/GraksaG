@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
     viewer.setSource(QUrl("qrc:/main.qml"));
-    viewer.showFullScreen();
+    viewer.showMaximized();
 
     return app.exec();
 }

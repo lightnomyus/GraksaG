@@ -42,7 +42,6 @@ Rectangle{
         TabBar {
             id: tabBar
             width: parent.width * 0.3
-            currentIndex: 2
             anchors.top: parent.top
 
             TabButton {
@@ -698,10 +697,6 @@ Rectangle{
             columns: 4
             rows: 2
 
-//            Item{
-//                Layout.fillWidth: true
-//            }
-
             GroupBox{
                 title: qsTr("Location and Surveillance")
                 Layout.preferredWidth: 0.32 * parent.width
@@ -762,14 +757,6 @@ Rectangle{
                 Layout.alignment: Qt.AlignRight
             }
 
-//            Item{
-//                Layout.fillWidth: true
-//            }
-
-//            Item{
-//                Layout.fillWidth: true
-//            }
-
             GroupBox{
                 title: qsTr("3D Odometri Position")
                 Layout.preferredWidth: 0.48 * parent.width
@@ -791,10 +778,6 @@ Rectangle{
                 Layout.alignment: Qt.AlignRight
 
             }
-
-//            Item{
-//                Layout.fillWidth: true
-//            }
 
         }
     }
