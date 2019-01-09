@@ -42,6 +42,7 @@ Rectangle{
         TabBar {
             id: tabBar
             width: parent.width * 0.3
+            currentIndex: 2
             anchors.top: parent.top
 
             TabButton {
@@ -319,8 +320,12 @@ Rectangle{
 
 
                             ColumnLayout{
-                                Layout.fillHeight: true
+                                height: parent.height
                                 Layout.preferredWidth: 0.45 * parent.width
+
+                                Item{
+                                    Layout.preferredHeight: 0.075 * parent.height
+                                }
 
                                 Label{
                                     Layout.fillWidth: true
@@ -565,6 +570,17 @@ Rectangle{
                         Layout.fillWidth: true
                         Layout.margins: 5
                         color: "#00000000"
+
+                        Label{
+                            id: label_map
+                            text: "Map Control"
+                            fontSizeMode: Text.HorizontalFit
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            anchors.bottom: parent.bottom
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                        }
                     }
 
                     ToolSeparator{
@@ -576,6 +592,17 @@ Rectangle{
                         Layout.fillWidth: true
                         Layout.margins: 5
                         color: "#00000000"
+
+                        Label{
+                            id: label_odo
+                            text: "3D Odometry Control"
+                            fontSizeMode: Text.HorizontalFit
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            anchors.bottom: parent.bottom
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                        }
                     }
 
                     ToolSeparator{
@@ -587,6 +614,17 @@ Rectangle{
                         Layout.fillWidth: true
                         Layout.margins: 5
                         color: "#00000000"
+
+                        Label{
+                            id: label_log
+                            text: "Log Control"
+                            fontSizeMode: Text.HorizontalFit
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            anchors.bottom: parent.bottom
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                        }
                     }
 
                     ToolSeparator{
@@ -598,6 +636,17 @@ Rectangle{
                         Layout.fillWidth: true
                         Layout.margins: 5
                         color: "#00000000"
+
+                        Label{
+                            id: label_2d
+                            text: "2D Graph Control"
+                            fontSizeMode: Text.HorizontalFit
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            anchors.bottom: parent.bottom
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                        }
                     }
 
                     ToolSeparator{
@@ -609,6 +658,17 @@ Rectangle{
                         Layout.fillWidth: true
                         Layout.margins: 5
                         color: "#00000000"
+
+                        Label{
+                            id: label_model3d
+                            text: "3D model Control"
+                            fontSizeMode: Text.HorizontalFit
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            anchors.bottom: parent.bottom
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                        }
                     }
 
                     ToolSeparator{
@@ -635,60 +695,120 @@ Rectangle{
             id: content_layout
             anchors.fill: parent
 
-            columns: 3
-            rows: 5
+            columns: 4
+            rows: 2
+
+//            Item{
+//                Layout.fillWidth: true
+//            }
 
             GroupBox{
                 title: qsTr("Location and Surveillance")
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.leftMargin: 5
-                Layout.topMargin: 5
+                Layout.preferredWidth: 0.32 * parent.width
+                Layout.preferredHeight: 0.48 * parent.height
+                Layout.margins: 5
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+                Layout.alignment: Qt.AlignLeft
 
             }
 
-            GroupBox{
-                title: qsTr("3D Odometri Position")
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.topMargin: 5
 
-            }
+            Rectangle{
+                Layout.preferredWidth: 0.32 * parent.width
+                Layout.preferredHeight: 0.48 * parent.height
+                Layout.margins: 5
+                Layout.columnSpan: 2
+                Layout.rowSpan: 1
+                Layout.alignment: Qt.AlignCenter
 
-            GroupBox{
-                title: qsTr("Realtime Graph")
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.topMargin: 5
-                Layout.rightMargin: 5
+                ColumnLayout{
+                    anchors.fill: parent
 
-            }
+                    Item {
+                        Layout.fillHeight: true
+                    }
 
-            GroupBox{
-                title: qsTr("Mission Log")
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.leftMargin: 5
-                Layout.bottomMargin: 5
+                    GroupBox{
+                        title: qsTr("Status and Data")
+                        Layout.preferredHeight: 0.43 * parent.height
+                        Layout.fillWidth: true
+                        Layout.margins: 4
 
-            }
+                    }
 
-            GroupBox{
-                title: qsTr("Status and Data")
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.bottomMargin: 5
+                    GroupBox{
+                        title: qsTr("Mission Log")
+                        Layout.preferredHeight: 0.43 * parent.height
+                        Layout.fillWidth: true
+                        Layout.margins: 4
+
+                    }
+
+                    Item {
+                        Layout.fillHeight: true
+                    }
+                }
 
             }
 
             GroupBox{
                 title: qsTr("3D Attitude Model")
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                Layout.bottomMargin: 5
-                Layout.rightMargin: 5
+                Layout.preferredWidth: 0.32 * parent.width
+                Layout.preferredHeight: 0.48 * parent.height
+                Layout.margins: 5
+                Layout.columnSpan: 1
+                Layout.rowSpan: 1
+                Layout.alignment: Qt.AlignRight
             }
+
+//            Item{
+//                Layout.fillWidth: true
+//            }
+
+//            Item{
+//                Layout.fillWidth: true
+//            }
+
+            GroupBox{
+                title: qsTr("3D Odometri Position")
+                Layout.preferredWidth: 0.48 * parent.width
+                Layout.preferredHeight: 0.48 * parent.height
+                Layout.margins: 5
+                Layout.columnSpan: 2
+                Layout.rowSpan: 1
+                Layout.alignment: Qt.AlignLeft
+
+            }
+
+            GroupBox{
+                title: qsTr("Realtime Graph")
+                Layout.preferredWidth: 0.48 * parent.width
+                Layout.preferredHeight: 0.48 * parent.height
+                Layout.margins: 5
+                Layout.columnSpan: 2
+                Layout.rowSpan: 1
+                Layout.alignment: Qt.AlignRight
+
+            }
+
+//            Item{
+//                Layout.fillWidth: true
+//            }
 
         }
     }
 }
+
+
+
+
+
+
+
+
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/
