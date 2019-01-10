@@ -1,4 +1,4 @@
-QT += quick widgets quickcontrols2
+QT += quick widgets quickcontrols2 datavisualization gui qml core charts
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use

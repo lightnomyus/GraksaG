@@ -861,6 +861,14 @@ Rectangle{
                 Layout.rowSpan: 1
                 Layout.alignment: Qt.AlignLeft
 
+                Rectangle{
+                    anchors.fill: parent
+
+                    ScatterGraph{
+                        anchors.fill: parent
+                    }
+                }
+
             }
 
             GroupBox{
@@ -871,6 +879,14 @@ Rectangle{
                 Layout.columnSpan: 2
                 Layout.rowSpan: 1
                 Layout.alignment: Qt.AlignRight
+
+                Rectangle{
+                    anchors.fill: parent
+
+                    SplineViewer{
+                        anchors.fill: parent
+                    }
+                }
 
             }
 

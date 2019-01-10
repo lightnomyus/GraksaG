@@ -11,7 +11,7 @@ Item {
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottom: clear_id.top
-        color: "blue"
+        color: "white"
 
         ListView{
             id: view_terminal
