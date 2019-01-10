@@ -706,6 +706,51 @@ Rectangle{
                 Layout.rowSpan: 1
                 Layout.alignment: Qt.AlignLeft
 
+                TabBar {
+                    id: tabBar_locsur
+                    width: parent.width * 0.4
+                    anchors.bottom: parent.bottom
+                    position: TabBar.Footer
+
+                    TabButton {
+                        id: tabButton_map
+                        text: qsTr("Map")
+                    }
+
+                    TabButton {
+                        id: tabButton_image
+                        text: qsTr("Image")
+                    }
+
+                }
+
+                StackLayout{
+                    anchors.top: parent.top
+                    anchors.bottom: tabBar_locsur.top
+                    width: parent.width
+                    currentIndex: tabBar_locsur.currentIndex
+
+                    Item {
+                        id: map_viewer
+
+                        Rectangle{
+                            anchors.fill: parent
+
+                            MapViewer{
+                                anchors.fill: parent
+                            }
+                        }
+                    }
+
+                    Item {
+                        id: image_viewer
+
+                        Rectangle{
+                            anchors.fill: parent
+                        }
+                    }
+                }
+
             }
 
 
@@ -737,6 +782,56 @@ Rectangle{
                         Layout.preferredHeight: 0.43 * parent.height
                         Layout.fillWidth: true
                         Layout.margins: 4
+
+                        TabBar {
+                            id: tabBar_log
+                            width: parent.width * 0.4
+                            anchors.bottom: parent.bottom
+                            position: TabBar.Footer
+
+                            TabButton {
+                                id: tabButton_mission
+                                text: qsTr("Mission Log")
+                            }
+
+                            TabButton {
+                                id: tabButton_data
+                                text: qsTr("Data Log")
+                            }
+
+                        }
+
+                        StackLayout{
+                            anchors.top: parent.top
+                            anchors.bottom: tabBar_log.top
+                            width: parent.width
+                            currentIndex: tabBar_log.currentIndex
+
+                            Item {
+                                id: log_mission
+
+                                Rectangle{
+                                    anchors.fill: parent
+
+                                    Terminal{
+                                        anchors.fill: parent
+                                    }
+                                }
+                            }
+
+                            Item {
+                                id: log_data
+
+                                Rectangle{
+                                    anchors.fill: parent
+
+                                    Terminal{
+                                        anchors.fill: parent
+                                    }
+                                }
+                            }
+                        }
+
 
                     }
 
@@ -782,6 +877,8 @@ Rectangle{
         }
     }
 }
+
+
 
 
 

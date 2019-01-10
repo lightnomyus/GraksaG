@@ -5,5 +5,7 @@
         <file>images/icons/play-button.svg</file>
         <file>images/icons/prohibition.svg</file>
         <file>images/icons/rocket-launch.svg</file>
+        <file>MapViewer.qml</file>
+        <file>Terminal.qml</file>
     </qresource>
 </RCC>
