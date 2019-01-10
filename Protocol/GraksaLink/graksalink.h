@@ -6,7 +6,14 @@
  * BYTE 2-4         Team Identifiacion
  * BYTE 5           Message Identification
  * BYTE 6-n         Payload
-*/
+ * */
+
+/*
+ * HOW TO CONSTRUCT MESSAGE
+ * 1. Intansiasi Objek message_t
+ * 2. Gunakan fungsi construct_Header
+ * 3. Gunakan fungsi construct_Message
+ * */
 
 /* Library used */
 #include <stdint.h>
@@ -66,9 +73,5 @@ void deconstruct_MSG_GZ(message_t *input, float *gz);
 void deconstruct_MSG_ALT(message_t *input, float *alt);
 void deconstruct_MSG_LON(message_t *input, double *lon);
 void deconstruct_MSG_LAT(message_t *input, double *lat);
-
-/* Helping Function */
-uint8_t checking_Header(message_t *input);
-
 
 #endif // GRAKSALINK_H
