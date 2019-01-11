@@ -1,129 +1,246 @@
 #include "graksalink.h"
 
-/* Construct Header */
-void construct_Header(message_t *output, uint8_t SOF, uint8_t Team_ID[3])
+/* Construct Message */
+void construct_MSG_AX(uint8_t **output, uint8_t SOF, uint8_t Team_ID[3], float ax)
 {
-    output->header.SOF = SOF;
-    for (int i=0; i<3; i++) {
-        output->header.Team_ID[i] = Team_ID[i];
+    uint8_t *p_byte = (uint8_t*) &ax;
+    size_t nBytes = sizeof (char)*5 + sizeof (ax);
+    uint8_t *temp;
+    *output = NULL;
+    *output = (uint8_t*) malloc(nBytes);
+    temp = *output;
+
+    for (size_t i=0; i<nBytes; i++){
+        if (i==0) {
+            temp[i]=SOF;
+        } else if (i>=1 && i<=3 ){
+            temp[i]=Team_ID[i-1];
+        } else if (i==4) {
+            temp[i]=GRAKSA_MSG_ID_AX;
+        } else {
+            temp[i]=p_byte[i-5];
+        }
     }
 }
 
-/* Construct Message */
-void construct_MSG_AX(message_t *output, float *ax)
+void construct_MSG_AY(uint8_t **output, uint8_t SOF, uint8_t Team_ID[3], float ay)
 {
-    output->header.Message_ID = GRAKSA_MSG_ID_AX;
-    size_t size = sizeof (*ax);
-    output->payload = (uint8_t*) malloc(size);
-    memcpy(output->payload, ax, size);
+    uint8_t *p_byte = (uint8_t*) &ay;
+    size_t nBytes = sizeof (char)*5 + sizeof (ay);
+    uint8_t *temp;
+    *output = NULL;
+    *output = (uint8_t*) malloc(nBytes);
+    temp = *output;
+
+    for (size_t i=0; i<nBytes; i++){
+        if (i==0) {
+            temp[i]=SOF;
+        } else if (i>=1 && i<=3 ){
+            temp[i]=Team_ID[i-1];
+        } else if (i==4) {
+            temp[i]=GRAKSA_MSG_ID_AY;
+        } else {
+            temp[i]=p_byte[i-5];
+        }
+    }
 }
 
-void construct_MSG_AY(message_t *output, float *ay)
+void construct_MSG_AZ(uint8_t **output, uint8_t SOF, uint8_t Team_ID[3], float az)
 {
-    output->header.Message_ID = GRAKSA_MSG_ID_AY;
-    size_t size = sizeof (*ay);
-    output->payload = (uint8_t*) malloc(size);
-    memcpy(output->payload, ay, size);
+    uint8_t *p_byte = (uint8_t*) &az;
+    size_t nBytes = sizeof (char)*5 + sizeof (az);
+    uint8_t *temp;
+    *output = NULL;
+    *output = (uint8_t*) malloc(nBytes);
+    temp = *output;
+
+    for (size_t i=0; i<nBytes; i++){
+        if (i==0) {
+            temp[i]=SOF;
+        } else if (i>=1 && i<=3 ){
+            temp[i]=Team_ID[i-1];
+        } else if (i==4) {
+            temp[i]=GRAKSA_MSG_ID_AZ;
+        } else {
+            temp[i]=p_byte[i-5];
+        }
+    }
 }
 
-void construct_MSG_AZ(message_t *output, float *az)
+void construct_MSG_GX(uint8_t **output, uint8_t SOF, uint8_t Team_ID[3], float gx)
 {
-    output->header.Message_ID = GRAKSA_MSG_ID_AZ;
-    size_t size = sizeof (*az);
-    output->payload = (uint8_t*) malloc(size);
-    memcpy(output->payload, az, size);
+    uint8_t *p_byte = (uint8_t*) &gx;
+    size_t nBytes = sizeof (char)*5 + sizeof (gx);
+    uint8_t *temp;
+    *output = NULL;
+    *output = (uint8_t*) malloc(nBytes);
+    temp = *output;
+
+    for (size_t i=0; i<nBytes; i++){
+        if (i==0) {
+            temp[i]=SOF;
+        } else if (i>=1 && i<=3 ){
+            temp[i]=Team_ID[i-1];
+        } else if (i==4) {
+            temp[i]=GRAKSA_MSG_ID_GX;
+        } else {
+            temp[i]=p_byte[i-5];
+        }
+    }
 }
 
-void construct_MSG_GX(message_t *output, float *gx)
+void construct_MSG_GY(uint8_t **output, uint8_t SOF, uint8_t Team_ID[3], float gy)
 {
-    output->header.Message_ID = GRAKSA_MSG_ID_GX;
-    size_t size = sizeof (*gx);
-    output->payload = (uint8_t*) malloc(size);
-    memcpy(output->payload, gx, size);
+    uint8_t *p_byte = (uint8_t*) &gy;
+    size_t nBytes = sizeof (char)*5 + sizeof (gy);
+    uint8_t *temp;
+    *output = NULL;
+    *output = (uint8_t*) malloc(nBytes);
+    temp = *output;
+
+    for (size_t i=0; i<nBytes; i++){
+        if (i==0) {
+            temp[i]=SOF;
+        } else if (i>=1 && i<=3 ){
+            temp[i]=Team_ID[i-1];
+        } else if (i==4) {
+            temp[i]=GRAKSA_MSG_ID_GY;
+        } else {
+            temp[i]=p_byte[i-5];
+        }
+    }
 }
 
-void construct_MSG_GY(message_t *output, float *gy)
+void construct_MSG_GZ(uint8_t **output, uint8_t SOF, uint8_t Team_ID[3], float gz)
 {
-    output->header.Message_ID = GRAKSA_MSG_ID_GY;
-    size_t size = sizeof (*gy);
-    output->payload = (uint8_t*) malloc(size);
-    memcpy(output->payload, gy, size);
+    uint8_t *p_byte = (uint8_t*) &gz;
+    size_t nBytes = sizeof (char)*5 + sizeof (gz);
+    uint8_t *temp;
+    *output = NULL;
+    *output = (uint8_t*) malloc(nBytes);
+    temp = *output;
+
+    for (size_t i=0; i<nBytes; i++){
+        if (i==0) {
+            temp[i]=SOF;
+        } else if (i>=1 && i<=3 ){
+            temp[i]=Team_ID[i-1];
+        } else if (i==4) {
+            temp[i]=GRAKSA_MSG_ID_GZ;
+        } else {
+            temp[i]=p_byte[i-5];
+        }
+    }
 }
 
-void construct_MSG_GZ(message_t *output, float *gz)
+void construct_MSG_ALT(uint8_t **output, uint8_t SOF, uint8_t Team_ID[3], float alt)
 {
-    output->header.Message_ID = GRAKSA_MSG_ID_GZ;
-    size_t size = sizeof (*gz);
-    output->payload = (uint8_t*) malloc(size);
-    memcpy(output->payload, gz, size);
+    uint8_t *p_byte = (uint8_t*) &alt;
+    size_t nBytes = sizeof (char)*5 + sizeof (alt);
+    uint8_t *temp;
+    *output = NULL;
+    *output = (uint8_t*) malloc(nBytes);
+    temp = *output;
+
+    for (size_t i=0; i<nBytes; i++){
+        if (i==0) {
+            temp[i]=SOF;
+        } else if (i>=1 && i<=3 ){
+            temp[i]=Team_ID[i-1];
+        } else if (i==4) {
+            temp[i]=GRAKSA_MSG_ID_ALT;
+        } else {
+            temp[i]=p_byte[i-5];
+        }
+    }
 }
 
-void construct_MSG_ALT(message_t *output, float *alt)
+void construct_MSG_LON(uint8_t **output, uint8_t SOF, uint8_t Team_ID[3], double lon)
 {
-    output->header.Message_ID = GRAKSA_MSG_ID_ALT;
-    size_t size = sizeof (*alt);
-    output->payload = (uint8_t*) malloc(size);
-    memcpy(output->payload, alt, size);
+    uint8_t *p_byte = (uint8_t*) &lon;
+    size_t nBytes = sizeof (char)*5 + sizeof (lon);
+    uint8_t *temp;
+    *output = NULL;
+    *output = (uint8_t*) malloc(nBytes);
+    temp = *output;
+
+    for (size_t i=0; i<nBytes; i++){
+        if (i==0) {
+            temp[i]=SOF;
+        } else if (i>=1 && i<=3 ){
+            temp[i]=Team_ID[i-1];
+        } else if (i==4) {
+            temp[i]=GRAKSA_MSG_ID_LON;
+        } else {
+            temp[i]=p_byte[i-5];
+        }
+    }
 }
 
-void construct_MSG_LON(message_t *output, double *lon)
+void construct_MSG_LAT(uint8_t **output, uint8_t SOF, uint8_t Team_ID[3], double lat)
 {
-    output->header.Message_ID = GRAKSA_MSG_ID_LON;
-    size_t size = sizeof (*lon);
-    output->payload = (uint8_t*) malloc(size);
-    memcpy(output->payload, lon, size);
+    uint8_t *p_byte = (uint8_t*) &lat;
+    size_t nBytes = sizeof (char)*5 + sizeof (lat);
+    uint8_t *temp;
+    *output = NULL;
+    *output = (uint8_t*) malloc(nBytes);
+    temp = *output;
+
+    for (size_t i=0; i<nBytes; i++){
+        if (i==0) {
+            temp[i]=SOF;
+        } else if (i>=1 && i<=3 ){
+            temp[i]=Team_ID[i-1];
+        } else if (i==4) {
+            temp[i]=GRAKSA_MSG_ID_LAT;
+        } else {
+            temp[i]=p_byte[i-5];
+        }
+    }
 }
 
-void construct_MSG_LAT(message_t *output, double *lat)
-{
-    output->header.Message_ID = GRAKSA_MSG_ID_LAT;
-    size_t size = sizeof (*lat);
-    output->payload = (uint8_t*) malloc(size);
-    memcpy(output->payload, lat, size);
-}
+///* Deconstruct Message */
+//void deconstruct_MSG_AX(message_t *input, float *ax)
+//{
+//    memcpy(ax,input->payload,sizeof (*ax));
+//}
 
-/* Deconstruct Message */
-void deconstruct_MSG_AX(message_t *input, float *ax)
-{
-    memcpy(ax,input->payload,sizeof (*ax));
-}
+//void deconstruct_MSG_AY(message_t *input, float *ay)
+//{
+//    memcpy(ay,input->payload,sizeof (*ay));
+//}
 
-void deconstruct_MSG_AY(message_t *input, float *ay)
-{
-    memcpy(ay,input->payload,sizeof (*ay));
-}
+//void deconstruct_MSG_AZ(message_t *input, float *az)
+//{
+//    memcpy(az,input->payload,sizeof (*az));
+//}
 
-void deconstruct_MSG_AZ(message_t *input, float *az)
-{
-    memcpy(az,input->payload,sizeof (*az));
-}
+//void deconstruct_MSG_GX(message_t *input, float *gx)
+//{
+//    memcpy(gx,input->payload,sizeof (*gx));
+//}
 
-void deconstruct_MSG_GX(message_t *input, float *gx)
-{
-    memcpy(gx,input->payload,sizeof (*gx));
-}
+//void deconstruct_MSG_GY(message_t *input, float *gy)
+//{
+//    memcpy(gy,input->payload,sizeof (*gy));
+//}
 
-void deconstruct_MSG_GY(message_t *input, float *gy)
-{
-    memcpy(gy,input->payload,sizeof (*gy));
-}
+//void deconstruct_MSG_GZ(message_t *input, float *gz)
+//{
+//    memcpy(gz,input->payload,sizeof (*gz));
+//}
 
-void deconstruct_MSG_GZ(message_t *input, float *gz)
-{
-    memcpy(gz,input->payload,sizeof (*gz));
-}
+//void deconstruct_MSG_ALT(message_t *input, float *alt)
+//{
+//    memcpy(alt,input->payload,sizeof (*alt));
+//}
 
-void deconstruct_MSG_ALT(message_t *input, float *alt)
-{
-    memcpy(alt,input->payload,sizeof (*alt));
-}
+//void deconstruct_MSG_LON(message_t *input, double *lon)
+//{
+//    memcpy(lon,input->payload,sizeof (*lon));
+//}
 
-void deconstruct_MSG_LON(message_t *input, double *lon)
-{
-    memcpy(lon,input->payload,sizeof (*lon));
-}
-
-void deconstruct_MSG_LAT(message_t *input, double *lat)
-{
-    memcpy(lat,input->payload,sizeof (*lat));
-}
+//void deconstruct_MSG_LAT(message_t *input, double *lat)
+//{
+//    memcpy(lat,input->payload,sizeof (*lat));
+//}
