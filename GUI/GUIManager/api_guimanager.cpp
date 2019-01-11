@@ -1,10 +1,25 @@
 #include "api_guimanager.h"
+#include "QDebug"
 
 API_GUIManager::API_GUIManager(QObject *parent) : QObject(parent)
 {
+    m_isReplay = false;
+    m_isRecord = false;
     m_timer = new QTimer(this);
     QObject::connect(m_timer,&QTimer::timeout,this,&API_GUIManager::update_UIAll);
-    m_timer->start(50);
+    m_timer->start(DELAY_TIME);
+}
+
+void API_GUIManager::mode_record()
+{
+    m_isRecord = true;
+    m_isReplay = false;
+}
+
+void API_GUIManager::mode_replay()
+{
+    m_isRecord = false;
+    m_isReplay = true;
 }
 
 void API_GUIManager::receive_Altitude(float alt)
@@ -70,9 +85,11 @@ void API_GUIManager::update_UIAll()
     }
 
     // Storage
-    emit update_Storage(temp_alt, temp_lon, temp_lat,
-                        temp_roll, temp_pitch, temp_yaw,
-                        temp_xpos, temp_ypos, temp_zpos);
+    if (m_isRecord){
+        emit update_Storage(temp_alt, temp_lon, temp_lat,
+                            temp_roll, temp_pitch, temp_yaw,
+                            temp_xpos, temp_ypos, temp_zpos);
+    }
     // Apogee
     if (static_cast<int>(temp_alt) != EMPTY_NUMBER){
         if (temp_alt > temp_apogee) {

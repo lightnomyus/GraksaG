@@ -11,5 +11,6 @@
 #define XPOS_LOG_ID 6
 #define YPOS_LOG_ID 7
 #define ZPOS_LOG_ID 8
+#define DELAY_TIME 100
 
 #endif // DEFINE_GUI_H

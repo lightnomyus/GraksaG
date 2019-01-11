@@ -31,8 +31,12 @@ public slots:
     void receive_Altitude(float alt);
     void receive_Coordinate(double lon, double lat);
     void receive_Odometry(float xpos, float ypos, float zpos);
+    void mode_replay();
+    void mode_record();
 
 private:
+    bool m_isReplay;
+    bool m_isRecord;
     QTimer* m_timer;
     QQueue<float> m_roll;
     QQueue<float> m_pitch;
