@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QQueue>
 #include <QTimer>
+#include <QtMath>
+#include "define_gui.h"
 
 class API_GUIManager : public QObject
 {
@@ -14,11 +16,14 @@ public:
 signals:
     void update_UIScatter(float xpos, float ypos, float zpos);
     void update_UISpline1(float launch_angle, float range, float alt);
-    void update_UILog(float data);
-    void update_UILog(double data);
+    void update_UILog(int id, float data);
+    void update_UILog(int id, double data);
     void update_UIMap(double lon, double lat);
     void update_UIModel3D(float roll, float pitch, float yaw);
     void update_UIApogee(float apogee);
+    void update_Storage(float alt, double lon, double lat,
+                        float roll, float pitch, float yaw,
+                        float xpos, float ypos, float zpos);
 
 public slots:
     void update_UIAll();
@@ -28,7 +33,7 @@ public slots:
     void receive_Odometry(float xpos, float ypos, float zpos);
 
 private:
-    QTimer m_timer;
+    QTimer* m_timer;
     QQueue<float> m_roll;
     QQueue<float> m_pitch;
     QQueue<float> m_yaw;
