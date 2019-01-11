@@ -20,7 +20,16 @@ signals:
     void send_DataCoordinate();
 
 public slots:
-    void receive_DataBytes();
+    void receive_DataByte(QByteArray data);
+    void set_TeamId (QString id);
+
+private:
+    int m_byteCounter;
+    int m_maxCounter;
+    message_t m_messageReceived;
+    message_t m_comparison;
+    QByteArray m_data;
+    uint8_t m_teamId[3];
 };
 
 #endif // API_PROTOCOLHANDLER_H
