@@ -1,4 +1,4 @@
-QT += quick
+QT += quick core gui
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -14,7 +14,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    api_storagehandler.cpp
+    api_storagehandler.cpp \
+    tester_writing.cpp
 
 RESOURCES += qml.qrc
 
@@ -30,4 +31,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    api_storagehandler.h
+    api_storagehandler.h \
+    tester_writing.h

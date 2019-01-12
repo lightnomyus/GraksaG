@@ -2,6 +2,7 @@
 
 API_StorageHandler::API_StorageHandler(QObject *parent) : QObject(parent)
 {
+    m_missionName = "mission_default";
     m_isRead = false;
     m_isWrite = false;
 }
