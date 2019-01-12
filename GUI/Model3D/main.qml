@@ -8,14 +8,17 @@ Rectangle {
 
     Rectangle {
         id: rectangle
-        x: 76
-        y: 29
-        width: 271
-        height: 259
+        x: 8
+        y: 8
+        width: 624
+        height: 280
         color: "#ffffff"
 
         Scene3D{
             anchors.fill: parent
+            Model3D{
+
+            }
         }
 
     }
