@@ -21,6 +21,8 @@ signals:
 public slots:
     void start_Write();
     void start_Read();
+    void end_Write();
+    void end_Read();
     void update_MissionName(QString missionName);
     void write_Data(float alt, double lon, double lat,
                     float roll, float pitch, float yaw,

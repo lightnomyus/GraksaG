@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "api_storagehandler.h"
 
 int main(int argc, char *argv[])
 {
