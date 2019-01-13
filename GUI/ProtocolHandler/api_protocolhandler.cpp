@@ -1,7 +1,11 @@
 #include "api_protocolhandler.h"
+#include <QtDebug>
 
 API_ProtocolHandler::API_ProtocolHandler(QObject *parent) : QObject(parent)
 {
+    m_teamId[0]='I';
+    m_teamId[1]='T';
+    m_teamId[2]='B';
     m_msgId = 99;
     m_byteCounter = 0;
     m_maxCounter = 999;
@@ -71,38 +75,47 @@ void API_ProtocolHandler::receive_DataByte(QByteArray data)
             switch (m_msgId) {
             case GRAKSA_MSG_ID_AX:
                 memcpy(&container_float, &(p_payload[5]), sizeof (float));
+                qDebug()<<"AX: "<<container_float;
                 m_ax.enqueue(container_float);
                 break;
             case GRAKSA_MSG_ID_AY:
                 memcpy(&container_float, &(p_payload[5]), sizeof (float));
+                qDebug()<<"AY: "<<container_float;
                 m_ay.enqueue(container_float);
                 break;
             case GRAKSA_MSG_ID_AZ:
                 memcpy(&container_float, &(p_payload[5]), sizeof (float));
+                qDebug()<<"AZ: "<<container_float;
                 m_az.enqueue(container_float);
                 break;
             case GRAKSA_MSG_ID_GX:
                 memcpy(&container_float, &(p_payload[5]), sizeof (float));
+                qDebug()<<"GX: "<<container_float;
                 m_gx.enqueue(container_float);
                 break;
             case GRAKSA_MSG_ID_GY:
                 memcpy(&container_float, &(p_payload[5]), sizeof (float));
+                qDebug()<<"GY: "<<container_float;
                 m_gy.enqueue(container_float);
                 break;
             case GRAKSA_MSG_ID_GZ:
                 memcpy(&container_float, &(p_payload[5]), sizeof (float));
+                qDebug()<<"GZ: "<<container_float;
                 m_gz.enqueue(container_float);
                 break;
             case GRAKSA_MSG_ID_ALT:
                 memcpy(&container_float, &(p_payload[5]), sizeof (float));
+                qDebug()<<"ALT: "<<container_float;
                 m_alt.enqueue(container_float);
                 break;
             case GRAKSA_MSG_ID_LON:
                 memcpy(&container_double, &(p_payload[5]), sizeof (double));
+                qDebug()<<"LON: "<<container_double;
                 m_lon.enqueue(container_double);
                 break;
             case GRAKSA_MSG_ID_LAT:
                 memcpy(&container_double, &(p_payload[5]), sizeof (double));
+                qDebug()<<"LAT: "<<container_double;
                 m_lat.enqueue(container_double);
                 break;
             case GRAKSA_MSG_ID_PHOTO:

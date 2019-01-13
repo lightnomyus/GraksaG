@@ -15,7 +15,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
     api_protocolhandler.cpp \
-    graksalink.c
+    graksalink.c \
+    tester_protocolhandler.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,4 +33,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     api_protocolhandler.h \
-    graksalink.h
+    graksalink.h \
+    tester_protocolhandler.h
