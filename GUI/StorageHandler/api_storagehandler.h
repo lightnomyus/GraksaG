@@ -11,8 +11,11 @@ class API_StorageHandler : public QObject
     Q_OBJECT
 public:
     explicit API_StorageHandler(QObject *parent = nullptr);
+    void process_line();
 
 signals:
+    void notif_ReadData();
+    void notif_EndRead();
     void send_Attitude(float roll, float pitch, float yaw);
     void send_Altitude(float alt);
     void send_Coordinate(double lon, double lat);
@@ -31,6 +34,7 @@ public slots:
 
 private:
     QString m_missionName;
+    QString m_readLine;
     bool m_isRead;
     bool m_isWrite;
     QFile m_file;

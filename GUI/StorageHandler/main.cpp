@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 #include <QQmlContext>
@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
 // basic set up
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
     QQuickView viewer;
 
 // object declaration
@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
     QObject::connect(&obj_Tester,&Tester_Writing::new_Name,&obj_StorageHandler,&API_StorageHandler::update_MissionName);
     QObject::connect(&obj_Tester,&Tester_Writing::start_Writing,&obj_StorageHandler,&API_StorageHandler::start_Write);
     QObject::connect(&obj_Tester,&Tester_Writing::end_Writing,&obj_StorageHandler,&API_StorageHandler::end_Write);
+    QObject::connect(&obj_Tester,&Tester_Writing::start_Reading,&obj_StorageHandler,&API_StorageHandler::start_Read);
 
 // binding c++ with qml
     viewer.rootContext()->setContextProperty("obj_StorageHandler",&obj_StorageHandler);

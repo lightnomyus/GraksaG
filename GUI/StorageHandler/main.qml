@@ -1,11 +1,21 @@
 import QtQuick.Controls 2.4
 import QtQuick 2.12
+import QtQuick.Dialogs 1.0
 
 Rectangle {
     id: root
     visible: true
     width: 640
     height: 480
+
+
+    FileDialog {
+        id: fileDialog
+        title: "Please choose a file"
+        onAccepted: {
+            obj_Tester.command_ReplayMission(fileDialog.fileUrl)
+        }
+    }
 
     Button {
         id: button
@@ -39,6 +49,14 @@ Rectangle {
         onPressed: obj_Tester.send_Data(spinBox.value,spinBox1.value,spinBox2.value,
                                         spinBox3.value,spinBox4.value,spinBox5.value,
                                         spinBox6.value,spinBox7.value,spinBox8.value)
+    }
+
+    Button {
+        id: button4
+        x: 412-285 + button3.x
+        y: 33
+        text: qsTr("Replay")
+        onPressed: fileDialog.open() //obj_Tester.command_StartRead()
     }
 
     SpinBox {
