@@ -14,18 +14,20 @@ void API_StorageHandler::update_MissionName(QString missionName)
 
 void API_StorageHandler::start_Read()
 {
+    QString fileName = m_missionName + ".csv";
     m_isRead = true;
     m_isWrite = false;
-    m_file.setFileName(m_missionName);
+    m_file.setFileName(fileName);
     m_file.open(QIODevice::ReadOnly);
     m_stream.setDevice(&m_file);
 }
 
 void API_StorageHandler::start_Write()
 {
+    QString fileName = m_missionName + ".csv";
     m_isWrite = true;
     m_isRead = false;
-    m_file.setFileName(m_missionName);
+    m_file.setFileName(fileName);
     m_file.open(QIODevice::WriteOnly);
     m_stream.setDevice(&m_file);
     m_stream << "Altitude" << "," << "Longitude" << "," << "Latitude" << ","

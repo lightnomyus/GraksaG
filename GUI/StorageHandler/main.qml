@@ -1,6 +1,5 @@
-import QtQuick.Window 2.2
-import QtQuick.Controls 1.4
-import QtQuick 2.9
+import QtQuick.Controls 2.4
+import QtQuick 2.12
 
 Rectangle {
     id: root
@@ -13,6 +12,7 @@ Rectangle {
         x: 35
         y: 33
         text: qsTr("New Mission")
+        onPressed: dialog.open()
     }
 
     Button {
@@ -20,6 +20,7 @@ Rectangle {
         x: 159
         y: 33
         text: qsTr("Start Writing")
+        onPressed: obj_Tester.command_StartWriting()
     }
 
     Button {
@@ -27,6 +28,7 @@ Rectangle {
         x: 285
         y: 33
         text: qsTr("End Writing")
+        onPressed: obj_Tester.command_EndWriting()
     }
 
     Button {
@@ -34,128 +36,151 @@ Rectangle {
         x: 412
         y: 33
         text: qsTr("Send Data")
+        onPressed: obj_Tester.send_Data(spinBox.value,spinBox1.value,spinBox2.value,
+                                        spinBox3.value,spinBox4.value,spinBox5.value,
+                                        spinBox6.value,spinBox7.value,spinBox8.value)
     }
 
     SpinBox {
         id: spinBox
         x: 35
-        y: 171
+        y: 106
     }
 
     Label {
         id: label
         x: 41
-        y: 152
+        y: 87
         text: qsTr("alt")
     }
 
     SpinBox {
         id: spinBox1
-        x: 88
+        x: 35
         y: 171
     }
 
     Label {
         id: label1
-        x: 94
+        x: 41
         y: 152
         text: qsTr("lon")
     }
 
     SpinBox {
         id: spinBox2
-        x: 143
-        y: 171
+        x: 35
+        y: 236
     }
 
     Label {
         id: label2
-        x: 149
-        y: 152
+        x: 41
+        y: 217
         text: qsTr("lat")
     }
 
     SpinBox {
         id: spinBox3
-        x: 194
-        y: 171
+        x: 35
+        y: 301
     }
 
     Label {
         id: label3
-        x: 200
-        y: 152
+        x: 41
+        y: 282
         text: qsTr("roll")
     }
 
     SpinBox {
         id: spinBox4
-        x: 247
-        y: 171
+        x: 35
+        y: 366
     }
 
     Label {
         id: label4
-        x: 253
-        y: 152
+        x: 41
+        y: 347
         text: qsTr("pitch")
     }
 
     SpinBox {
         id: spinBox5
-        x: 302
-        y: 171
+        x: 206
+        y: 106
     }
 
     Label {
         id: label5
-        x: 308
-        y: 152
+        x: 212
+        y: 87
         text: qsTr("yaw")
     }
 
     SpinBox {
         id: spinBox6
-        x: 354
+        x: 206
         y: 171
     }
 
     Label {
         id: label6
-        x: 360
+        x: 212
         y: 152
         text: qsTr("xpos")
     }
 
     SpinBox {
         id: spinBox7
-        x: 407
-        y: 171
+        x: 206
+        y: 236
     }
 
     Label {
         id: label7
-        x: 413
-        y: 152
+        x: 212
+        y: 217
         text: qsTr("ypos")
     }
 
     SpinBox {
         id: spinBox8
-        x: 462
-        y: 171
+        x: 206
+        y: 301
     }
 
     Label {
         id: label8
-        x: 468
-        y: 152
+        x: 212
+        y: 282
         text: qsTr("zpos")
     }
 
-//    SpinBox {
-//        id: spinBox
-//        x: 35
-//        y: 157
-//    }
+
+    Dialog{
+        id: dialog
+        modal: true
+        title: qsTr("Mission's Name")
+        standardButtons: Dialog.Save
+        width: 300
+        height: 300
+        anchors.centerIn: parent
+        Item {
+            id: dialog_content
+            anchors.fill: parent
+            TextInput{
+                id: text_input
+                width: 0.5* parent.width
+                anchors.centerIn: parent
+                color: "grey"
+                text: qsTr("give me name")
+            }
+        }
+
+        onAccepted: obj_Tester.command_NewMission(text_input.displayText)
+    }
+
+
 }
