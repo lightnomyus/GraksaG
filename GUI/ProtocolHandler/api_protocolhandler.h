@@ -14,11 +14,15 @@ class API_ProtocolHandler : public QObject
     Q_OBJECT
 public:
     explicit API_ProtocolHandler(QObject *parent = nullptr);
+    void emiter_DataAccel();
+    void emiter_DataGyro();
+    void emiter_DataGPS();
 
 signals:
-    void send_DataAccel();
-    void send_DataGyro();
-    void send_DataGPS();
+    void send_DataAccel(float ax, float ay, float az);
+    void send_DataGyro(float gx, float gy, float gz);
+    void send_DataGPS(double lon, double lan);
+    void send_DataAltitude(float alt);
     void send_DataCamera();
 
 public slots:
@@ -28,6 +32,14 @@ public slots:
 private:
     int m_byteCounter;
     int m_maxCounter;
+    uint m_axTag;
+    uint m_ayTag;
+    uint m_azTag;
+    uint m_gxTag;
+    uint m_gyTag;
+    uint m_gzTag;
+    uint m_lonTag;
+    uint m_latTag;
     QByteArray m_data;
     uint8_t m_teamId[3];
     uint8_t m_msgId;
