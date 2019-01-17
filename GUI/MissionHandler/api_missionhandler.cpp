@@ -17,6 +17,7 @@ void API_MissionHandler::get_fileName(QString path)
     QString fileName = path.split('/').takeLast().split('.')[0];
     //qDebug()<<fileName;
     emit send_MissionName(fileName);
+    replay_mission();
 }
 
 void API_MissionHandler::start_mission()

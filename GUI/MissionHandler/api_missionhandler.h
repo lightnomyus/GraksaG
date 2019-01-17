@@ -27,6 +27,9 @@ signals:
     void command_TakePicture();
 
 public slots:
+
+private:
+    QString m_message;
 };
 
 #endif // API_MISSIONHANDLER_H
