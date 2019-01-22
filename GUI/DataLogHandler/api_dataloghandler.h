@@ -2,6 +2,7 @@
 #define API_DATALOGHANDLER_H
 
 #include <QObject>
+#include "define_gui.h"
 
 class API_DataLogHandler : public QObject
 {
@@ -21,6 +22,7 @@ public slots:
     void receive_DataLog(int id, double data);
 
 private:
+    QString m_message;
     bool m_activeAltitude;
     bool m_activeAttitude;
     bool m_active3DPosition;
