@@ -11,7 +11,7 @@ public:
     Q_INVOKABLE void send_data(float x, float y);
 
 signals:
-    void incoming_Data(float x, float y);
+    void incoming_Data(float angle, float x, float y);
 
 public slots:
 };
