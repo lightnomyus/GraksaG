@@ -2,6 +2,7 @@
 #define API_MISSIONHANDLER_H
 
 #include <QObject>
+#include <QTime>
 
 class API_MissionHandler : public QObject
 {
@@ -13,8 +14,8 @@ public:
     Q_INVOKABLE void start_mission();
     Q_INVOKABLE void stop_mission();
     Q_INVOKABLE void replay_mission();
-    Q_INVOKABLE void start_dataAqc();
-    Q_INVOKABLE void stop_dataAqc();
+    Q_INVOKABLE void start_datAcq();
+    Q_INVOKABLE void stop_dataAcq();
     Q_INVOKABLE void take_picture();
 
 signals:
@@ -22,13 +23,15 @@ signals:
     void command_StartMission();
     void command_StopMission();
     void command_ReplayMission();
-    void command_StartDataAqc();
-    void command_StopDataAqc();
+    void command_StartDataAcq();
+    void command_StopDataAcq();
     void command_TakePicture();
+    void notif_Log(QString message);
 
 public slots:
 
 private:
+    QTime m_time;
     QString m_message;
 };
 
