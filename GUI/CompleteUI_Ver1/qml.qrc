@@ -10,6 +10,5 @@
         <file>SplineViewer.qml</file>
         <file>LogMission.qml</file>
         <file>LogData.qml</file>
-        <file>Terminal.qml</file>
     </qresource>
 </RCC>

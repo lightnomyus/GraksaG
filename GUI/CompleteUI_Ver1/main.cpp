@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
 // connection between objects
     QObject::connect(viewer.engine(), &QQmlEngine::quit, &viewer, &QWindow::close);
     QObject::connect(&obj_MissionHandler,&API_MissionHandler::notif_Log,&obj_LogMission,&API_Terminal::receive_Message);
+    QObject::connect(&obj_SerialHandler,&API_SerialHandler::message_SerialHandler,&obj_LogMission,&API_Terminal::receive_Message);
 
 // binding c++ with qml
     viewer.rootContext()->setContextProperty("obj_MissionHandler",&obj_MissionHandler);
@@ -34,8 +35,8 @@ int main(int argc, char *argv[])
 // final set up
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
     viewer.setSource(QUrl("qrc:/main.qml"));
-    viewer.showFullScreen();
-    //viewer.showMaximized();
+    //viewer.showFullScreen();
+    viewer.showMaximized();
 
     return app.exec();
 }
