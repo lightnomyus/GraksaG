@@ -18,7 +18,8 @@ SOURCES += \
     api_serialhandler.cpp \
     api_terminal.cpp \
     api_protocolhandler.cpp \
-    graksalink.c
+    graksalink.c \
+    api_guimanager.cpp
 
 RESOURCES += qml.qrc
 
@@ -38,4 +39,6 @@ HEADERS += \
     api_serialhandler.h \
     api_terminal.h \
     api_protocolhandler.h \
-    graksalink.h
+    graksalink.h \
+    api_guimanager.h \
+    define_gui.h
