@@ -3,6 +3,7 @@
 API_SerialHandler::API_SerialHandler(QObject *parent) : QObject(parent)
 {
     m_isActive = false;
+    m_isDataAcq = false;
     connect(this,&API_SerialHandler::changed_List,this,&API_SerialHandler::update_List);
     connect(&m_serial,&QSerialPort::readyRead,this,&API_SerialHandler::read_DataBytes);
 //    connect(this,SIGNAL(changed_List()),this,SLOT(update_List()));
@@ -144,7 +145,7 @@ void API_SerialHandler::update_List()
 
 void API_SerialHandler::read_DataBytes()
 {
-    if (m_serial.bytesAvailable()>=BYTES_PER_READ) {
+    if (m_serial.bytesAvailable()>=BYTES_PER_READ && m_isDataAcq) {
         m_data = m_serial.read(BYTES_PER_READ);
         emit send_DataByte(m_data);
         emit message_SerialHandler(m_data);
@@ -155,4 +156,14 @@ void API_SerialHandler::read_DataBytes()
 void API_SerialHandler::write_DataBytes(QByteArray data)
 {
     m_serial.write(data);
+}
+
+void API_SerialHandler::start_DataAcq()
+{
+    m_isDataAcq = true;
+}
+
+void API_SerialHandler::stop_DataAcq()
+{
+    m_isDataAcq = false;
 }

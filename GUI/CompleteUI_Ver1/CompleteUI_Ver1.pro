@@ -16,7 +16,9 @@ SOURCES += \
         main.cpp \
     api_missionhandler.cpp \
     api_serialhandler.cpp \
-    api_terminal.cpp
+    api_terminal.cpp \
+    api_protocolhandler.cpp \
+    graksalink.c
 
 RESOURCES += qml.qrc
 
@@ -34,4 +36,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     api_missionhandler.h \
     api_serialhandler.h \
-    api_terminal.h
+    api_terminal.h \
+    api_protocolhandler.h \
+    graksalink.h

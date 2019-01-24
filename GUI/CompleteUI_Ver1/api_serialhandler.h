@@ -31,10 +31,13 @@ public slots:
     void read_DataBytes();
     void write_DataBytes(QByteArray data);
     void update_List();
+    void start_DataAcq();
+    void stop_DataAcq();
 
 private:
     QString m_message;
     bool m_isActive;
+    bool m_isDataAcq;
     QSerialPort m_serial;
     QList<QSerialPortInfo> m_infos;
     QByteArray m_data;
