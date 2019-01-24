@@ -1,4 +1,4 @@
-QT += quick widgets quickcontrols2 datavisualization gui qml core charts serialport
+QT += quick core gui widgets
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -14,9 +14,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    api_missionhandler.cpp \
-    api_serialhandler.cpp \
-    api_terminal.cpp
+    api_storagehandler.cpp \
+    tester_writing.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,6 +31,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    api_missionhandler.h \
-    api_serialhandler.h \
-    api_terminal.h
+    api_storagehandler.h \
+    tester_writing.h

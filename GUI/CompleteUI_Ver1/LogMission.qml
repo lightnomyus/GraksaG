@@ -11,7 +11,7 @@ Item {
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottom: clear_id.top
-        color: "black"
+        color: "white"
 
         ListView{
             id: view_terminal
@@ -41,7 +41,7 @@ Item {
                 spacing: 10
                 Text {
                     text: message
-                    color: "white"
+                    color: "black"
                 }
             }
         }
@@ -52,10 +52,10 @@ Item {
     }
 
 
-//    Connections{
-//        target: obj_Terminal
-//        onUpdate_UI: {
-//            model_terminal.append({message:message});
-//        }
-//    }
+    Connections{
+        target: obj_LogMission
+        onUpdate_UI: {
+            model_terminal.append({message:message});
+        }
+    }
 }

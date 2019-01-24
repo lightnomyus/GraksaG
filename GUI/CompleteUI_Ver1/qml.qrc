@@ -6,8 +6,10 @@
         <file>images/icons/prohibition.svg</file>
         <file>images/icons/rocket-launch.svg</file>
         <file>MapViewer.qml</file>
-        <file>Terminal.qml</file>
         <file>ScatterGraph.qml</file>
         <file>SplineViewer.qml</file>
+        <file>LogMission.qml</file>
+        <file>LogData.qml</file>
+        <file>Terminal.qml</file>
     </qresource>
 </RCC>

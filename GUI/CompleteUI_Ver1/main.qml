@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
+import Qt.labs.platform 1.1
 
 Rectangle{
     id: root
@@ -89,6 +90,8 @@ Rectangle{
                             anchors.top: parent.top
 
                             Button{
+                                id: button_newMission
+                                enabled: true
                                 Layout.margins: 5
                                 Layout.fillHeight: true
                                 Layout.fillWidth: true
@@ -96,9 +99,17 @@ Rectangle{
                                 icon.color: "black"
                                 display: AbstractButton.TextUnderIcon
                                 text: qsTr("New Mission")
+                                onPressed: {
+                                    popup_NewMission.open()
+                                    button_replayMission.enabled = false
+                                    enabled = false
+                                    button_startMission.enabled = true
+                                }
                             }
 
                             Button{
+                                id: button_replayMission
+                                enabled: true
                                 Layout.margins: 5
                                 Layout.fillHeight: true
                                 Layout.fillWidth: true
@@ -106,9 +117,16 @@ Rectangle{
                                 icon.color: "black"
                                 display: AbstractButton.TextUnderIcon
                                 text: qsTr("Replay Mission")
+                                onPressed: {
+                                    button_newMission.enabled = false
+                                    fileDialog.open()
+                                    enabled = false
+                                }
                             }
 
                             Button{
+                                id: button_startMission
+                                enabled: false
                                 Layout.margins: 5
                                 Layout.fillHeight: true
                                 Layout.fillWidth: true
@@ -116,9 +134,17 @@ Rectangle{
                                 icon.color: "black"
                                 display: AbstractButton.TextUnderIcon
                                 text: qsTr("Start Mission")
+                                onPressed: {
+                                    button_stopMission.enabled = true
+                                    obj_MissionHandler.start_mission()
+                                    enabled = false
+                                    button_startDataAcq.enabled = true
+                                }
                             }
 
                             Button{
+                                id: button_stopMission
+                                enabled: false
                                 Layout.margins: 5
                                 Layout.fillHeight: true
                                 Layout.fillWidth: true
@@ -126,6 +152,14 @@ Rectangle{
                                 icon.color: "black"
                                 display: AbstractButton.TextUnderIcon
                                 text: qsTr("Stop Mission")
+                                onPressed: {
+                                    button_newMission.enabled = true
+                                    button_replayMission.enabled = true
+                                    button_stopDataAcq.enabled = false
+                                    button_startDataAcq.enabled = false
+                                    obj_MissionHandler.stop_mission()
+                                    enabled = false
+                                }
                             }
                         }
 
@@ -179,22 +213,28 @@ Rectangle{
                             }
 
                             Button{
+                                enabled: true
                                 Layout.preferredHeight: 0.3 * parent.height
                                 Layout.fillWidth: true
                                 text: qsTr("Scan")
+                                onPressed: obj_SerialHandler.scan_serial()
 
                             }
 
                             Button{
+                                enabled: true
                                 Layout.preferredHeight: 0.3 * parent.height
                                 Layout.fillWidth: true
                                 text: qsTr("Connect")
+                                onPressed: obj_SerialHandler.open_serial()
                             }
 
                             Button{
+                                enabled: false
                                 Layout.preferredHeight: 0.3 * parent.height
                                 Layout.fillWidth: true
                                 text: qsTr("Disconnect")
+                                onPressed: obj_SerialHandler.close_serial()
 
                             }
                         }
@@ -228,6 +268,8 @@ Rectangle{
                             anchors.top: parent.top
 
                             Button{
+                                id: button_startDataAcq
+                                enabled: false
                                 Layout.margins: 5
                                 Layout.fillHeight: true
                                 Layout.fillWidth: true
@@ -235,9 +277,16 @@ Rectangle{
                                 icon.color: "black"
                                 display: AbstractButton.TextUnderIcon
                                 text: qsTr("Start Data Acquisition")
+                                onPressed: {
+                                    obj_MissionHandler.start_datAcq()
+                                    button_stopDataAcq.enabled = true
+                                    enabled = false
+                                }
                             }
 
                             Button{
+                                id: button_stopDataAcq
+                                enabled: false
                                 Layout.margins: 5
                                 Layout.fillHeight: true
                                 Layout.fillWidth: true
@@ -245,6 +294,11 @@ Rectangle{
                                 icon.color: "black"
                                 display: AbstractButton.TextUnderIcon
                                 text: qsTr("Stop Data Acquisition")
+                                onPressed: {
+                                    obj_MissionHandler.stop_dataAcq()
+                                    button_startDataAcq.enabled = true
+                                    enabled = false
+                                }
                             }
                         }
 
@@ -813,9 +867,10 @@ Rectangle{
                                 Rectangle{
                                     anchors.fill: parent
 
-                                    Terminal{
+                                    LogMission{
                                         anchors.fill: parent
                                     }
+
                                 }
                             }
 
@@ -825,9 +880,10 @@ Rectangle{
                                 Rectangle{
                                     anchors.fill: parent
 
-                                    Terminal{
+                                    LogData{
                                         anchors.fill: parent
                                     }
+
                                 }
                             }
                         }
@@ -892,6 +948,66 @@ Rectangle{
 
         }
     }
+
+
+    // pop up new mission
+    Popup{
+       id: popup_NewMission
+       anchors.centerIn: parent
+       width: parent.width/3
+       height: parent.height/3
+       modal: true
+       closePolicy: Popup.NoAutoClose
+
+       Rectangle{
+           id: popup_rectangle
+           anchors.centerIn: parent
+           width: root.width/3
+           height: root.height/3
+           color: myPalette.base
+
+           Button {
+               id: button2
+               anchors.horizontalCenter: parent.horizontalCenter
+               anchors.bottom: parent.bottom
+               anchors.bottomMargin: 15
+               text: qsTr("Save")
+               onPressed: {
+                   obj_MissionHandler.new_mission(textField.text)
+                   popup_NewMission.close()
+               }
+           }
+
+           Label {
+               anchors.horizontalCenter: parent.horizontalCenter
+               anchors.top: parent.top
+               anchors.topMargin: 10
+               text: qsTr("Enter mission name")
+               verticalAlignment: Text.AlignVCenter
+               horizontalAlignment: Text.AlignHCenter
+           }
+
+           TextField {
+               id: textField
+               anchors.bottom: button2.top
+               anchors.bottomMargin: 20
+               anchors.horizontalCenter: parent.horizontalCenter
+               width: parent.width/2
+               placeholderText: qsTr("Give a name")
+
+           }
+
+       }
+    }
+
+    // file Dialog
+    FileDialog{
+        id: fileDialog
+        onAccepted: {
+            obj_MissionHandler.get_fileName(fileDialog.file)
+        }
+    }
+
 }
 
 
