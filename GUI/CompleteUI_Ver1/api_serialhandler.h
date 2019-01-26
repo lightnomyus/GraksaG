@@ -20,6 +20,8 @@ public:
     Q_INVOKABLE void set_databits(int databits);
     Q_INVOKABLE void set_parity(int parity);
     Q_INVOKABLE void set_stopbits(int stopbits);
+    Q_INVOKABLE void start_DataAcq();
+    Q_INVOKABLE void stop_DataAcq();
 
 signals:
     void message_SerialHandler(QString message);
@@ -31,8 +33,7 @@ public slots:
     void read_DataBytes();
     void write_DataBytes(QByteArray data);
     void update_List();
-    void start_DataAcq();
-    void stop_DataAcq();
+
 
 private:
     QString m_message;

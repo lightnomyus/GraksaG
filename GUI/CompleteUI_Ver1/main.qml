@@ -671,6 +671,37 @@ Rectangle{
                         Layout.margins: 5
                         color: "#00000000"
 
+                        GridLayout{
+                            columns: 2
+                            anchors.top:parent.top
+                            anchors.bottom: label_log.top
+                            CheckBox{
+                                text: qsTr("Altitude")
+                                onStateChanged: obj_DataLogHandler.set_activeAltitude(checked)
+                            }
+                            CheckBox{
+                                text: qsTr("Attitude")
+                                onStateChanged: obj_DataLogHandler.set_activeAttitude(checked)
+                            }
+                            CheckBox{
+                                text: qsTr("Coordinate")
+                                onStateChanged: obj_DataLogHandler.set_activeCoordinate(checked)
+                            }
+                            CheckBox{
+                                text: qsTr("3D Pos")
+                                onStateChanged: obj_DataLogHandler.set_active3DPosition(checked)
+                            }
+                            CheckBox{
+                                text: qsTr("Accel")
+                                onStateChanged: obj_DataLogHandler.set_activeAccel(checked)
+                            }
+                            CheckBox{
+                                text: qsTr("Gyro")
+                                onStateChanged: obj_DataLogHandler.set_activeGyro(checked)
+                            }
+
+                        }
+
                         Label{
                             id: label_log
                             text: "Log Control"
