@@ -20,8 +20,8 @@ signals:
     void message_DataLog(QString m_message);
 
 public slots:
-    void receive_DataLog(int id, float data);
-    void receive_DataLog(int id, double data);
+    void receive_DataLogF(int id, float data);
+    void receive_DataLogD(int id, double data);
 
 private:
     QString m_message;

@@ -47,7 +47,7 @@ void API_DataLogHandler::set_activeAccel(bool checked)
 
 // slot
 
-void API_DataLogHandler::receive_DataLog(int id, float data)
+void API_DataLogHandler::receive_DataLogF(int id, float data)
 {
     // parsing data berdasarkan id
     switch (id) {
@@ -132,7 +132,7 @@ void API_DataLogHandler::receive_DataLog(int id, float data)
     }
 }
 
-void API_DataLogHandler::receive_DataLog(int id, double data)
+void API_DataLogHandler::receive_DataLogD(int id, double data)
 {
     // parsing data berdasarkan id
     switch (id) {

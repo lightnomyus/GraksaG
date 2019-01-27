@@ -39,7 +39,11 @@ int main(int argc, char *argv[])
     // koneksi ProtocolHandler ke GUIManager untuk data accel dan gyro
     QObject::connect(&obj_ProtocolHandler, &API_ProtocolHandler::send_DataAccel,&obj_GUIManager,&API_GUIManager::receive_DataAccel);
     QObject::connect(&obj_ProtocolHandler, &API_ProtocolHandler::send_DataGyro,&obj_GUIManager,&API_GUIManager::receive_DataGyro);
-    // koneksi GUIManager ke datalog handler
+    // koneksi GUIManager ke datalog handler untuk data float dan double
+    QObject::connect(&obj_GUIManager, &API_GUIManager::update_UILogF, &obj_DataLogHandler,&API_DataLogHandler::receive_DataLogF);
+    QObject::connect(&obj_GUIManager, &API_GUIManager::update_UILogD, &obj_DataLogHandler,&API_DataLogHandler::receive_DataLogD);
+    // koneksi datalog handler ke datalog untuk notif
+    QObject::connect(&obj_DataLogHandler, &API_DataLogHandler::message_DataLog, &obj_LogData,&API_Terminal::receive_Message);
 
 // binding c++ with qml
     viewer.rootContext()->setContextProperty("obj_MissionHandler",&obj_MissionHandler);

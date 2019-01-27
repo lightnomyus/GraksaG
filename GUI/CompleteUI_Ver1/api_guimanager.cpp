@@ -129,31 +129,31 @@ void API_GUIManager::update_UIAll()
             temp_apogee = temp_alt;
             emit update_UIApogee(temp_apogee);
         }
-        emit update_UILog(ALT_LOG_ID, temp_alt);
+        emit update_UILogF(ALT_LOG_ID, temp_alt);
     }
     // MAP
     if ((static_cast<int>(temp_lon) != EMPTY_NUMBER)
             && (static_cast<int>(temp_lat) != EMPTY_NUMBER)){
-        emit update_UILog(LON_LOG_ID, temp_lon);
-        emit update_UILog(LAT_LOG_ID, temp_lat);
+        emit update_UILogD(LON_LOG_ID, temp_lon);
+        emit update_UILogD(LAT_LOG_ID, temp_lat);
         emit update_UIMap(temp_lon, temp_lat);
     }
     // Scatter
     if ((static_cast<int>(temp_xpos) != EMPTY_NUMBER)
             && (static_cast<int>(temp_ypos) != EMPTY_NUMBER)
             && (static_cast<int>(temp_zpos) != EMPTY_NUMBER)){
-        emit update_UILog(XPOS_LOG_ID, temp_xpos);
-        emit update_UILog(YPOS_LOG_ID, temp_ypos);
-        emit update_UILog(ZPOS_LOG_ID, temp_zpos);
+        emit update_UILogF(XPOS_LOG_ID, temp_xpos);
+        emit update_UILogF(YPOS_LOG_ID, temp_ypos);
+        emit update_UILogF(ZPOS_LOG_ID, temp_zpos);
         emit update_UIScatter(temp_xpos, temp_ypos, temp_zpos);
     }
     // Model3d
     if ((static_cast<int>(temp_roll) != EMPTY_NUMBER)
             && (static_cast<int>(temp_pitch) != EMPTY_NUMBER)
             && (static_cast<int>(temp_yaw) != EMPTY_NUMBER)){
-        emit update_UILog(ROLL_LOG_ID, temp_roll);
-        emit update_UILog(PITCH_LOG_ID, temp_pitch);
-        emit update_UILog(YAW_LOG_ID, temp_yaw);
+        emit update_UILogF(ROLL_LOG_ID, temp_roll);
+        emit update_UILogF(PITCH_LOG_ID, temp_pitch);
+        emit update_UILogF(YAW_LOG_ID, temp_yaw);
         emit update_UIModel3D(temp_roll, temp_pitch, temp_yaw);
     }
     // Spline
@@ -168,16 +168,16 @@ void API_GUIManager::update_UIAll()
     if ((static_cast<int>(temp_ax) != EMPTY_NUMBER)
             && (static_cast<int>(temp_ay) != EMPTY_NUMBER)
             && (static_cast<int>(temp_az) != EMPTY_NUMBER)){
-        emit update_UILog(AX_LOG_ID, temp_ax);
-        emit update_UILog(AY_LOG_ID, temp_ay);
-        emit update_UILog(AZ_LOG_ID, temp_az);
+        emit update_UILogF(AX_LOG_ID, temp_ax);
+        emit update_UILogF(AY_LOG_ID, temp_ay);
+        emit update_UILogF(AZ_LOG_ID, temp_az);
     }
     // Daya Gyro
     if ((static_cast<int>(temp_gx) != EMPTY_NUMBER)
             && (static_cast<int>(temp_gy) != EMPTY_NUMBER)
             && (static_cast<int>(temp_gz) != EMPTY_NUMBER)){
-        emit update_UILog(GX_LOG_ID, temp_gx);
-        emit update_UILog(GY_LOG_ID, temp_gy);
-        emit update_UILog(GZ_LOG_ID, temp_gz);
+        emit update_UILogF(GX_LOG_ID, temp_gx);
+        emit update_UILogF(GY_LOG_ID, temp_gy);
+        emit update_UILogF(GZ_LOG_ID, temp_gz);
     }
 }

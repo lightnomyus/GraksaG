@@ -200,6 +200,18 @@ Rectangle{
                                horizontalAlignment: Text.AlignHCenter
                             }
 
+                            Connections{
+                                    target: obj_SerialHandler
+                                    onUpdate_UI: {
+                                        if (port_name != "zero") {
+                                            model_port.clear()
+                                            model_port.append({port : port_name})
+                                        } else {
+                                            model_port.clear()
+                                        }
+                                    }
+                            }
+
                             ComboBox {
                                 Layout.preferredHeight: 0.3 * parent.height
                                 Layout.fillWidth: true
@@ -672,7 +684,7 @@ Rectangle{
                         color: "#00000000"
 
                         GridLayout{
-                            columns: 2
+                            columns: 3
                             anchors.top:parent.top
                             anchors.bottom: label_log.top
                             CheckBox{
