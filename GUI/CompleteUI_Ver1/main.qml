@@ -290,7 +290,8 @@ Rectangle{
                                 display: AbstractButton.TextUnderIcon
                                 text: qsTr("Start Data Acquisition")
                                 onPressed: {
-                                    obj_MissionHandler.start_datAcq()
+                                    //obj_MissionHandler.start_dataAcq()
+                                    obj_SerialHandler.start_DataAcq()
                                     button_stopDataAcq.enabled = true
                                     enabled = false
                                 }
@@ -307,7 +308,8 @@ Rectangle{
                                 display: AbstractButton.TextUnderIcon
                                 text: qsTr("Stop Data Acquisition")
                                 onPressed: {
-                                    obj_MissionHandler.stop_dataAcq()
+                                    //obj_MissionHandler.stop_dataAcq()
+                                    obj_SerialHandler.stop_DataAcq()
                                     button_startDataAcq.enabled = true
                                     enabled = false
                                 }
