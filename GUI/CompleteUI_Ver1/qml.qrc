@@ -10,5 +10,8 @@
         <file>SplineViewer.qml</file>
         <file>LogMission.qml</file>
         <file>LogData.qml</file>
+        <file>Model3D.qml</file>
+        <file>3D/garuda.stl</file>
+        <file>3D/Payload.stl</file>
     </qresource>
 </RCC>

@@ -1,5 +1,5 @@
 #include "api_serialhandler.h"
-#include <QtDebug>
+//#include <QtDebug>
 
 API_SerialHandler::API_SerialHandler(QObject *parent) : QObject(parent)
 {
@@ -148,11 +148,10 @@ void API_SerialHandler::read_DataBytes()
 {
     if (m_serial.bytesAvailable()>=BYTES_PER_READ /*&& m_isDataAcq*/) {
         m_data = m_serial.read(BYTES_PER_READ);
-        qDebug()<<m_data;
+//        qDebug()<<m_data;
         if (m_isDataAcq){
             emit send_DataByte(m_data);
         }
-        emit message_SerialHandler(m_data);
     }
 
 }
@@ -164,12 +163,12 @@ void API_SerialHandler::write_DataBytes(QByteArray data)
 
 void API_SerialHandler::start_DataAcq()
 {
-    qDebug()<<"start data acq";
+//    qDebug()<<"start data acq";
     m_isDataAcq = true;
 }
 
 void API_SerialHandler::stop_DataAcq()
 {
-    qDebug()<<"stop data acq";
+//    qDebug()<<"stop data acq";
     m_isDataAcq = false;
 }

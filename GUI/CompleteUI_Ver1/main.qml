@@ -1,7 +1,9 @@
 import QtQuick 2.12
+import QtQuick.Scene3D 2.0
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import Qt.labs.platform 1.1
+
 
 Rectangle{
     id: root
@@ -234,20 +236,29 @@ Rectangle{
                             }
 
                             Button{
+                                id: button_connect
                                 enabled: true
                                 Layout.preferredHeight: 0.3 * parent.height
                                 Layout.fillWidth: true
                                 text: qsTr("Connect")
-                                onPressed: obj_SerialHandler.open_serial()
+                                onPressed: {
+                                    obj_SerialHandler.open_serial()
+                                    button_connect.enabled = false
+                                    button_disconnect.enabled = true
+                                }
                             }
 
                             Button{
+                                id: button_disconnect
                                 enabled: false
                                 Layout.preferredHeight: 0.3 * parent.height
                                 Layout.fillWidth: true
                                 text: qsTr("Disconnect")
-                                onPressed: obj_SerialHandler.close_serial()
-
+                                onPressed: {
+                                    obj_SerialHandler.close_serial()
+                                    button_disconnect.enabled = false
+                                    button_connect.enabled = true
+                                }
                             }
                         }
 
@@ -290,8 +301,8 @@ Rectangle{
                                 display: AbstractButton.TextUnderIcon
                                 text: qsTr("Start Data Acquisition")
                                 onPressed: {
-                                    //obj_MissionHandler.start_dataAcq()
                                     obj_SerialHandler.start_DataAcq()
+                                    obj_MissionHandler.start_datAcq()
                                     button_stopDataAcq.enabled = true
                                     enabled = false
                                 }
@@ -308,8 +319,8 @@ Rectangle{
                                 display: AbstractButton.TextUnderIcon
                                 text: qsTr("Stop Data Acquisition")
                                 onPressed: {
-                                    //obj_MissionHandler.stop_dataAcq()
                                     obj_SerialHandler.stop_DataAcq()
+                                    obj_MissionHandler.stop_dataAcq()
                                     button_startDataAcq.enabled = true
                                     enabled = false
                                 }
@@ -348,78 +359,6 @@ Rectangle{
                 RowLayout{
                     id: ribbon_layout2
                     anchors.fill: parent
-
-                    Rectangle{
-                        Layout.fillHeight: true
-                        Layout.fillWidth: true
-                        Layout.margins: 5
-                        color: "#00000000"
-
-                        RowLayout{
-                            anchors.fill: parent
-
-                            Item {
-                                Layout.fillWidth: true
-                            }
-
-                            ColumnLayout{
-                                Layout.fillHeight: true
-                                Layout.preferredWidth: 0.45 * parent.width
-
-                                Button{
-                                    Layout.fillHeight: true
-                                    Layout.fillWidth: true
-                                    text: qsTr("Scan")
-                                    onPressed: obj_SerialHandler.scan_serial();
-                                }
-
-                                Button{
-                                    Layout.fillHeight: true
-                                    Layout.fillWidth: true
-                                    text: qsTr("Connect")
-                                    onPressed: obj_SerialHandler.open_serial();
-                                }
-
-                                Button{
-                                    Layout.fillHeight: true
-                                    Layout.fillWidth: true
-                                    text: qsTr("Disconnect")
-                                    onPressed: obj_SerialHandler.close_serial();
-                                }
-                            }
-
-
-                            ColumnLayout{
-                                height: parent.height
-                                Layout.preferredWidth: 0.45 * parent.width
-
-                                Item{
-                                    Layout.preferredHeight: 0.075 * parent.height
-                                }
-
-                                Label{
-                                    Layout.fillWidth: true
-                                    text: qsTr("Select Port")
-                                    fontSizeMode: Text.HorizontalFit
-                                    verticalAlignment: Text.AlignVCenter
-                                    horizontalAlignment: Text.AlignHCenter
-                                }
-
-                                ComboBox{
-                                    Layout.fillWidth: true
-                                }
-
-                                Item{
-                                    Layout.fillHeight: true
-                                }
-                            }
-
-                        }
-                    }
-
-                    ToolSeparator{
-                        Layout.fillHeight: true
-                    }
 
                     Rectangle{
                         Layout.fillHeight: true
@@ -691,27 +630,27 @@ Rectangle{
                             anchors.bottom: label_log.top
                             CheckBox{
                                 text: qsTr("Altitude")
-                                onStateChanged: obj_DataLogHandler.set_activeAltitude(checked)
+                                onCheckStateChanged: obj_DataLogHandler.set_activeAltitude(checked)
                             }
                             CheckBox{
                                 text: qsTr("Attitude")
-                                onStateChanged: obj_DataLogHandler.set_activeAttitude(checked)
+                                onCheckStateChanged: obj_DataLogHandler.set_activeAttitude(checked)
                             }
                             CheckBox{
                                 text: qsTr("Coordinate")
-                                onStateChanged: obj_DataLogHandler.set_activeCoordinate(checked)
+                                onCheckStateChanged: obj_DataLogHandler.set_activeCoordinate(checked)
                             }
                             CheckBox{
                                 text: qsTr("3D Pos")
-                                onStateChanged: obj_DataLogHandler.set_active3DPosition(checked)
+                                onCheckStateChanged: obj_DataLogHandler.set_active3DPosition(checked)
                             }
                             CheckBox{
                                 text: qsTr("Accel")
-                                onStateChanged: obj_DataLogHandler.set_activeAccel(checked)
+                                onCheckStateChanged: obj_DataLogHandler.set_activeAccel(checked)
                             }
                             CheckBox{
                                 text: qsTr("Gyro")
-                                onStateChanged: obj_DataLogHandler.set_activeGyro(checked)
+                                onCheckStateChanged: obj_DataLogHandler.set_activeGyro(checked)
                             }
 
                         }
@@ -946,6 +885,7 @@ Rectangle{
 
             }
 
+
             GroupBox{
                 title: qsTr("3D Attitude Model")
                 Layout.preferredWidth: 0.32 * parent.width
@@ -954,6 +894,14 @@ Rectangle{
                 Layout.columnSpan: 1
                 Layout.rowSpan: 1
                 Layout.alignment: Qt.AlignRight
+
+//                Scene3D{
+//                    anchors.fill: parent
+//                    Model3D{
+//                        id: model_payload
+//                    }
+//                }
+
             }
 
             GroupBox{
@@ -965,12 +913,8 @@ Rectangle{
                 Layout.rowSpan: 1
                 Layout.alignment: Qt.AlignLeft
 
-                Rectangle{
+                ScatterGraph{
                     anchors.fill: parent
-
-                    ScatterGraph{
-                        anchors.fill: parent
-                    }
                 }
 
             }
@@ -985,7 +929,7 @@ Rectangle{
                 Layout.alignment: Qt.AlignRight
 
                 Rectangle{
-                    anchors.fill: parent
+
 
                     SplineViewer{
                         anchors.fill: parent

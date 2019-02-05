@@ -23,7 +23,9 @@ signals:
     void update_UIApogee(float apogee);
     void update_Storage(float alt, double lon, double lat,
                         float roll, float pitch, float yaw,
-                        float xpos, float ypos, float zpos);
+                        float xpos, float ypos, float zpos,
+                        float ax, float ay, float az,
+                        float gx, float gy, float gz);
 
 public slots:
     void update_UIAll();

@@ -1,5 +1,5 @@
 #include "api_dataloghandler.h"
-//#include <QDebug>
+#include <QDebug>
 
 API_DataLogHandler::API_DataLogHandler(QObject *parent) : QObject(parent)
 {
@@ -94,8 +94,10 @@ void API_DataLogHandler::receive_DataLogF(int id, float data)
         }
         break;
     case AX_LOG_ID:
+        qDebug()<<"case ax detected";
         if (m_activeAccel) {
             m_message = "Ax: " + QString::number(static_cast<double>(data));
+            qDebug()<<"send message ax";
             emit message_DataLog(m_message);
         }
         break;

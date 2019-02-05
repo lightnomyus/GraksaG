@@ -9,6 +9,7 @@
 #include "api_protocolhandler.h"
 #include "api_dataloghandler.h"
 #include "api_guimanager.h"
+#include "api_storagehandler.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,10 +27,17 @@ int main(int argc, char *argv[])
     API_ProtocolHandler obj_ProtocolHandler;
     API_DataLogHandler obj_DataLogHandler;
     API_GUIManager obj_GUIManager;
+    API_StorageHandler obj_StorageHandler;
 
 // connection between objects
     // koneksi ui ke Qt untuk fungsi quit
     QObject::connect(viewer.engine(), &QQmlEngine::quit, &viewer, &QWindow::close);
+    // koneksi MissionHandler ke StorageHandler untuk filename, tanda record or replay
+    QObject::connect(&obj_MissionHandler,&API_MissionHandler::send_MissionName,&obj_StorageHandler,&API_StorageHandler::update_MissionName);
+    QObject::connect(&obj_MissionHandler,&API_MissionHandler::command_StartDataAcq,&obj_StorageHandler,&API_StorageHandler::start_Write);
+    QObject::connect(&obj_MissionHandler,&API_MissionHandler::command_StopDataAcq,&obj_StorageHandler,&API_StorageHandler::end_Write);
+    // koneksi MissionHandler ke GUIManager untuk mode record or replay
+    QObject::connect(&obj_MissionHandler,&API_MissionHandler::command_StartDataAcq,&obj_GUIManager,&API_GUIManager::mode_record);
     // koneksi MissionHandler ke LogMission untuk notif
     QObject::connect(&obj_MissionHandler,&API_MissionHandler::notif_Log,&obj_LogMission,&API_Terminal::receive_Message);
     // koneksi SerialHandler ke LogMission untuk notif
@@ -42,6 +50,8 @@ int main(int argc, char *argv[])
     // koneksi GUIManager ke datalog handler untuk data float dan double
     QObject::connect(&obj_GUIManager, &API_GUIManager::update_UILogF, &obj_DataLogHandler,&API_DataLogHandler::receive_DataLogF);
     QObject::connect(&obj_GUIManager, &API_GUIManager::update_UILogD, &obj_DataLogHandler,&API_DataLogHandler::receive_DataLogD);
+    // koneksi GUIManager ke storage hanler untuk ngasih data
+    QObject::connect(&obj_GUIManager, &API_GUIManager::update_Storage, &obj_StorageHandler,&API_StorageHandler::write_Data);
     // koneksi datalog handler ke datalog untuk notif
     QObject::connect(&obj_DataLogHandler, &API_DataLogHandler::message_DataLog, &obj_LogData,&API_Terminal::receive_Message);
 

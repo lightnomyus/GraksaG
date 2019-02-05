@@ -63,6 +63,7 @@ void API_GUIManager::receive_Coordinate(double lon, double lat)
 
 void API_GUIManager::update_UIAll()
 {
+    qDebug()<<"update ui!";
     float temp_alt, temp_roll, temp_pitch, temp_yaw, temp_xpos, temp_ypos, temp_zpos;
     float temp_ax, temp_ay, temp_az, temp_gx, temp_gy, temp_gz;
     double temp_lon, temp_lat;
@@ -121,7 +122,9 @@ void API_GUIManager::update_UIAll()
     if (m_isRecord){
         emit update_Storage(temp_alt, temp_lon, temp_lat,
                             temp_roll, temp_pitch, temp_yaw,
-                            temp_xpos, temp_ypos, temp_zpos);
+                            temp_xpos, temp_ypos, temp_zpos,
+                            temp_ax, temp_ay, temp_az,
+                            temp_gx, temp_gy, temp_gz);
     }
     // Apogee
     if (static_cast<int>(temp_alt) != EMPTY_NUMBER){
@@ -168,6 +171,7 @@ void API_GUIManager::update_UIAll()
     if ((static_cast<int>(temp_ax) != EMPTY_NUMBER)
             && (static_cast<int>(temp_ay) != EMPTY_NUMBER)
             && (static_cast<int>(temp_az) != EMPTY_NUMBER)){
+        //qDebug()<<"update accel log";
         emit update_UILogF(AX_LOG_ID, temp_ax);
         emit update_UILogF(AY_LOG_ID, temp_ay);
         emit update_UILogF(AZ_LOG_ID, temp_az);

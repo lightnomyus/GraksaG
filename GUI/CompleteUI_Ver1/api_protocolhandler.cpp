@@ -24,6 +24,9 @@ void API_ProtocolHandler::emiter_DataAccel()
     if ((m_axTag == m_ayTag)&&(m_axTag == m_azTag)&&(m_ayTag == m_azTag)) {
         emit send_DataAccel(m_ax.dequeue(),m_ay.dequeue(),m_az.dequeue());
     } else {
+        m_axTag = 0;
+        m_ayTag = 0;
+        m_azTag = 0;
         m_ax.clear();
         m_ay.clear();
         m_az.clear();
@@ -35,6 +38,9 @@ void API_ProtocolHandler::emiter_DataGyro()
     if ((m_gxTag == m_gyTag)&&(m_gxTag == m_gzTag)&&(m_gyTag == m_gzTag)) {
         emit send_DataGyro(m_gx.dequeue(),m_gy.dequeue(),m_gz.dequeue());
     } else {
+        m_gxTag = 0;
+        m_gyTag = 0;
+        m_gzTag = 0;
         m_gx.clear();
         m_gy.clear();
         m_gz.clear();
@@ -46,6 +52,8 @@ void API_ProtocolHandler::emiter_DataGPS()
     if (m_lonTag == m_latTag) {
         emit send_DataGPS(m_lon.dequeue(),m_lat.dequeue());
     } else {
+        m_lonTag = 0;
+        m_latTag = 0;
         m_lon.clear();
         m_lat.clear();
     }
