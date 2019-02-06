@@ -1,5 +1,5 @@
 #include "api_storagehandler.h"
-//#include <QtDebug>
+#include <QtDebug>
 
 API_StorageHandler::API_StorageHandler(QObject *parent) : QObject(parent)
 {
@@ -109,11 +109,12 @@ void API_StorageHandler::read_Data()
 {
     if (m_isRead) {
         m_readLine = m_stream.readLine();
-        while(!m_stream.atEnd() && m_readLine!="EOF") {
+        while(m_readLine!="EOF") {
             process_line();
             //qDebug()<<m_readLine;
             m_readLine = m_stream.readLine();
         }
+        qDebug()<<"replay end";
         emit notif_EndRead();
     }
 }

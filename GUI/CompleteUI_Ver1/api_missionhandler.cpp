@@ -63,3 +63,9 @@ void API_MissionHandler::take_picture()
     emit notif_Log(m_message);
     emit command_TakePicture();
 }
+
+void API_MissionHandler::notif_EndReplay()
+{
+    m_message = m_time.currentTime().toString() + " : Finished Replay";
+    emit notif_Log(m_message);
+}

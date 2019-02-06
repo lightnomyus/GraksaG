@@ -29,6 +29,7 @@ signals:
     void notif_Log(QString message);
 
 public slots:
+    void notif_EndReplay();
 
 private:
     QTime m_time;
