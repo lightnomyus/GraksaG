@@ -111,8 +111,8 @@ void API_StorageHandler::read_Data()
         m_readLine = m_stream.readLine();
         while(m_readLine!="EOF") {
             process_line();
-            //qDebug()<<m_readLine;
             m_readLine = m_stream.readLine();
+            //qDebug()<<m_readLine;
         }
         qDebug()<<"replay end";
         emit notif_EndRead();

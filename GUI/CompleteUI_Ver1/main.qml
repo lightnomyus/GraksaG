@@ -120,9 +120,7 @@ Rectangle{
                                 display: AbstractButton.TextUnderIcon
                                 text: qsTr("Replay Mission")
                                 onPressed: {
-                                    button_newMission.enabled = false
                                     fileDialog.open()
-                                    enabled = false
                                 }
                             }
 

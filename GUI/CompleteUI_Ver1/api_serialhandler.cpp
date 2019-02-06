@@ -151,6 +151,7 @@ void API_SerialHandler::read_DataBytes()
 //        qDebug()<<m_data;
         if (m_isDataAcq){
             emit send_DataByte(m_data);
+            m_data.clear();
         }
     }
 

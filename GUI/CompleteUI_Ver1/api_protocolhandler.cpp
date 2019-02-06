@@ -142,38 +142,38 @@ void API_ProtocolHandler::receive_DataByte(QByteArray data)
                 break;
             case GRAKSA_MSG_ID_GX:
                 memcpy(&container_float, &(p_payload[5]), sizeof (float));
-                qDebug()<<"GX: "<<container_float;
+                //qDebug()<<"GX: "<<container_float;
                 m_gx.enqueue(container_float);
                 m_gxTag += 1;
                 break;
             case GRAKSA_MSG_ID_GY:
                 memcpy(&container_float, &(p_payload[5]), sizeof (float));
-                qDebug()<<"GY: "<<container_float;
+                //qDebug()<<"GY: "<<container_float;
                 m_gy.enqueue(container_float);
                 m_gyTag += 1;
                 break;
             case GRAKSA_MSG_ID_GZ:
                 memcpy(&container_float, &(p_payload[5]), sizeof (float));
-                qDebug()<<"GZ: "<<container_float;
+                //qDebug()<<"GZ: "<<container_float;
                 m_gz.enqueue(container_float);
                 m_gzTag += 1;
                 emiter_DataGyro();
                 break;
             case GRAKSA_MSG_ID_ALT:
                 memcpy(&container_float, &(p_payload[5]), sizeof (float));
-                qDebug()<<"ALT: "<<container_float;
+                //qDebug()<<"ALT: "<<container_float;
                 m_alt.enqueue(container_float);
                 emit send_DataAltitude(m_alt.dequeue());
                 break;
             case GRAKSA_MSG_ID_LON:
                 memcpy(&container_double, &(p_payload[5]), sizeof (double));
-                qDebug()<<"LON: "<<container_double;
+                //qDebug()<<"LON: "<<container_double;
                 m_lon.enqueue(container_double);
                 m_lonTag += 1;
                 break;
             case GRAKSA_MSG_ID_LAT:
                 memcpy(&container_double, &(p_payload[5]), sizeof (double));
-                qDebug()<<"LAT: "<<container_double;
+                //qDebug()<<"LAT: "<<container_double;
                 m_lat.enqueue(container_double);
                 m_latTag += 1;
                 emiter_DataGPS();

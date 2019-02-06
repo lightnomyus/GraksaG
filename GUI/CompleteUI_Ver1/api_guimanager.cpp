@@ -1,5 +1,5 @@
 #include "api_guimanager.h"
-#include "QDebug"
+//#include "QDebug"
 
 API_GUIManager::API_GUIManager(QObject *parent) : QObject(parent)
 {
@@ -63,7 +63,7 @@ void API_GUIManager::receive_Coordinate(double lon, double lat)
 
 void API_GUIManager::update_UIAll()
 {
-    qDebug()<<"update ui!";
+    //qDebug()<<"update ui!";
     float temp_alt, temp_roll, temp_pitch, temp_yaw, temp_xpos, temp_ypos, temp_zpos;
     float temp_ax, temp_ay, temp_az, temp_gx, temp_gy, temp_gz;
     double temp_lon, temp_lat;

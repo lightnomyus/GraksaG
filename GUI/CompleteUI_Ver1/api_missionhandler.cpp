@@ -31,9 +31,9 @@ void API_MissionHandler::start_mission()
 
 void API_MissionHandler::replay_mission()
 {
-    emit command_ReplayMission();
     m_message = m_time.currentTime().toString() + " : Replay old mission";
     emit notif_Log(m_message);
+    emit command_ReplayMission();
 }
 
 void API_MissionHandler::stop_mission()
