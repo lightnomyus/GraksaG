@@ -9,9 +9,13 @@ class Tester_ChartViewer : public QObject
 public:
     explicit Tester_ChartViewer(QObject *parent = nullptr);
     Q_INVOKABLE void send_data(float x, float y);
+    Q_INVOKABLE void send_1data(float x);
+    Q_INVOKABLE void send_3data(float x, float y, float z);
 
 signals:
-    void incoming_Data(float x, float y);
+    void incoming_Data(float angle, float x, float y);
+    void incoming_Data1(float data);
+    void incoming_Data3(float x, float y, float z);
 
 public slots:
 };

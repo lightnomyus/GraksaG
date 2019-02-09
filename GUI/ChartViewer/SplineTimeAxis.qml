@@ -18,6 +18,7 @@ Item {
             anchors.left: parent.left
             text: qsTr("Clear")
             onClicked: {
+                obj_ChartViewer.clear_time1()
                 id_SplineSeries.clear()
                 id_SplineSeries.add_zero = true
                 xAxis.min = 0
@@ -28,21 +29,10 @@ Item {
         }
 
         Button{
-            id: button_lock
-            height: parent.height
-            width: 0.25*parent.width
-            anchors.left: button_clear.right
-            text: qsTr("Lock")
-            onClicked: {
-                id_SplineSeries.name = qsTr("%1°").arg(obj_ChartViewer.get_launcAngle())
-            }
-        }
-
-        Button{
             id: button_theme
             height: parent.height
             width: 0.25*parent.width
-            anchors.left: button_lock.right
+            anchors.left: button_clear.right
             text: qsTr("Change Theme")
             onClicked: {
                 if (id_ChartViewer.theme == ChartView.ChartThemeLight) {
@@ -89,7 +79,7 @@ Item {
 
         ChartView{
             id: id_ChartViewer
-            title: qsTr("Range vs Altitude")
+            title: qsTr("Some Data")
             anchors.fill: parent
             antialiasing: true
             theme: ChartView.ChartThemeQt
@@ -108,7 +98,7 @@ Item {
 
             SplineSeries{
                 id: id_SplineSeries
-                name: qsTr("degree")
+                name: qsTr("data 1")
                 property bool add_zero: true
                 axisX: xAxis
                 axisY: yAxis
@@ -127,11 +117,14 @@ Item {
                 if (xAxis.max <= x) {
                     xAxis.max = x+1
                 }
-                if (yAxis.max <= y) {
-                    yAxis.max = y+1
-                }
                 if (xAxis.min > x) {
                     xAxis.min = x-1
+                }
+                if (xAxis.max-xAxis.min >= 11) {
+                    xAxis.min = xAxis.max-10
+                }
+                if (yAxis.max <= y) {
+                    yAxis.max = y+1
                 }
                 if (yAxis.min > y) {
                     yAxis.min = y-1
