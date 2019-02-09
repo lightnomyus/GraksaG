@@ -16,7 +16,15 @@ Rectangle {
         height: 393
         color: "#ffffff"
 
-        SplineViewer{
+//        SplineViewer{
+//            anchors.fill: parent
+//        }
+
+//        SplineTimeAxis{
+//            anchors.fill: parent
+//        }
+
+        Spline3Axis{
             anchors.fill: parent
         }
     }
@@ -39,7 +47,7 @@ Rectangle {
         y: 414
         text: qsTr("Send")
         onClicked: {
-            obj_TesterChartViewer.send_data(spinBox.value,spinBox1.value)
+            obj_TesterChartViewer.send_3data(spinBox.value,spinBox1.value,1);
         }
     }
 
