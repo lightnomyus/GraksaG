@@ -117,35 +117,35 @@ Item {
 
             }
 
-//            Connections{
-//                target: obj_MapViewer
-//                onUpdate_UI: {
-//                    id_map.center = QtPositioning.coordinate(longitude,latitude)
+            Connections{
+                target: obj_MapViewer
+                onUpdate_UI: {
+                    id_map.center = QtPositioning.coordinate(longitude,latitude)
 
-//                    if (isHome) {
-//                        id_map.start_tracing = true
-//                        home.coordinate = QtPositioning.coordinate(longitude,latitude)
-//                        id_map.add_line = true
-//                    }
+                    if (isHome) {
+                        id_map.start_tracing = true
+                        home.coordinate = QtPositioning.coordinate(longitude,latitude)
+                        id_map.add_line = true
+                    }
 
-//                    if (id_map.start_tracing) {
-//                        if (id_map.add_line) {
-//                            id_map.addMapItem(tracer)
-//                            id_map.addMapItem(home)
-//                            id_map.add_line = false
-//                            for (var i=tracer.pathLength()-1;i>=0;i--) {
-//                                tracer.removeCoordinate(i)
-//                            }
-//                        }
+                    if (id_map.start_tracing) {
+                        if (id_map.add_line) {
+                            id_map.addMapItem(tracer)
+                            id_map.addMapItem(home)
+                            id_map.add_line = false
+                            for (var i=tracer.pathLength()-1;i>=0;i--) {
+                                tracer.removeCoordinate(i)
+                            }
+                        }
 
-//                        tracer.addCoordinate(QtPositioning.coordinate(longitude,latitude))
-//                    }
+                        tracer.addCoordinate(QtPositioning.coordinate(longitude,latitude))
+                    }
 
-//                    label_infolon.text = qsTr("%1").arg(longitude)
-//                    label_infolat.text = qsTr("%2").arg(latitude)
+                    label_infolon.text = qsTr("%1").arg(longitude)
+                    label_infolat.text = qsTr("%2").arg(latitude)
 
-//                }
-//            }
+                }
+            }
 
         }
 

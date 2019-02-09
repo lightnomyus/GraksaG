@@ -108,10 +108,10 @@ Item {
             id: data1_model
         }
 
-//        Connections{
-//            target: obj_Scatter3D
-//            onUpdate_UI: data1_model.append({"xPos": xPos, "yPos": yPos, "zPos": zPos})
-//        }
+        Connections{
+            target: obj_Scatter3D
+            onUpdate_UI: data1_model.append({"xPos": xPos, "yPos": yPos, "zPos": zPos})
+        }
 
     }
 

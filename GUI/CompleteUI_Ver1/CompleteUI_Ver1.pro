@@ -24,7 +24,9 @@ SOURCES += \
     api_guimanager.cpp \
     api_dataloghandler.cpp \
     api_modelattitude.cpp \
-    api_storagehandler.cpp
+    api_storagehandler.cpp \
+    api_mapviewer.cpp \
+    api_scatter3d.cpp
 
 RESOURCES += qml.qrc
 
@@ -49,4 +51,6 @@ HEADERS += \
     define_gui.h \
     api_dataloghandler.h \
     api_modelattitude.h \
-    api_storagehandler.h
+    api_storagehandler.h \
+    api_mapviewer.h \
+    api_scatter3d.h
