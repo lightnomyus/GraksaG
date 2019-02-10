@@ -1,3 +1,3 @@
 # GraksaG
 
-Berisikan source code untuk payload dan GUI
+This Repo consist of my work on GUI Preparation for LAPAN Competition
