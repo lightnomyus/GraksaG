@@ -16,6 +16,8 @@ public:
 signals:
     void update_UIScatter(float xpos, float ypos, float zpos);
     void update_UISpline1(float launch_angle, float range, float alt);
+    void update_UISpline2(float ax, float ay, float az);
+    void update_UISpline3(float gx, float gy, float gz);
     void update_UILogF(int id, float data);
     void update_UILogD(int id, double data);
     void update_UIMap(double lon, double lat);

@@ -360,7 +360,7 @@ Rectangle{
 
                     Rectangle{
                         Layout.fillHeight: true
-                        Layout.fillWidth: true
+                        Layout.preferredWidth: 0.2 * parent.width
                         Layout.margins: 5
                         color: "#00000000"
 
@@ -413,7 +413,7 @@ Rectangle{
 
                     Rectangle{
                         Layout.fillHeight: true
-                        Layout.fillWidth: true
+                        Layout.preferredWidth: 0.2 * parent.width
                         Layout.margins: 5
                         color: "#00000000"
 
@@ -465,7 +465,7 @@ Rectangle{
 
                     Rectangle{
                         Layout.fillHeight: true
-                        Layout.fillWidth: true
+                        Layout.preferredWidth: 0.2 * parent.width
                         Layout.margins: 5
                         color: "#00000000"
 
@@ -515,7 +515,7 @@ Rectangle{
 
                     Rectangle{
                         Layout.fillHeight: true
-                        Layout.fillWidth: true
+                        Layout.preferredWidth: 0.2 * parent.width
                         Layout.margins: 5
                         color: "#00000000"
 
@@ -559,6 +559,10 @@ Rectangle{
 
                     ToolSeparator{
                         Layout.fillHeight: true
+                    }
+
+                    Item{
+                        Layout.fillWidth: true
                     }
 
                 }
@@ -893,12 +897,12 @@ Rectangle{
                 Layout.rowSpan: 1
                 Layout.alignment: Qt.AlignRight
 
-//                Scene3D{
-//                    anchors.fill: parent
-//                    Model3D{
-//                        id: model_payload
-//                    }
-//                }
+                Scene3D{
+                    anchors.fill: parent
+                    Model3D{
+                        id: model_payload
+                    }
+                }
 
             }
 
@@ -926,11 +930,72 @@ Rectangle{
                 Layout.rowSpan: 1
                 Layout.alignment: Qt.AlignRight
 
-                Rectangle{
+                TabBar {
+                    id: tabBar_Spline
+                    width: parent.width * 0.4
+                    anchors.bottom: parent.bottom
+                    position: TabBar.Footer
 
+                    TabButton {
+                        id: tabButton_RangeAlt
+                        text: qsTr("Range vs Altitude")
+                    }
 
-                    SplineViewer{
-                        anchors.fill: parent
+                    TabButton {
+                        id: tabButton_Accelero
+                        text: qsTr("Accelerometer")
+                    }
+
+                    TabButton {
+                        id: tabButton_Gyro
+                        text: qsTr("Gyroscope")
+                    }
+
+                }
+
+                StackLayout{
+                    anchors.top: parent.top
+                    anchors.bottom: tabBar_Spline.top
+                    width: parent.width
+                    currentIndex: tabBar_Spline.currentIndex
+
+                    Item {
+                        id: spline_RangeAlt
+
+                        Rectangle{
+                            anchors.fill: parent
+
+                            SplineViewer{
+                                anchors.fill: parent
+                            }
+
+                        }
+                    }
+
+                    Item {
+                        id: spline_Accelero
+
+                        Rectangle{
+                            anchors.fill: parent
+
+                            Spline3AxisAccel{
+                                anchors.fill: parent
+                            }
+
+                        }
+                    }
+
+                    Item {
+                        id: spline_Gyro
+
+                        Rectangle{
+                            anchors.fill: parent
+
+                            Spline3AxisGyro{
+                                anchors.fill: parent
+                            }
+
+                        }
                     }
                 }
 

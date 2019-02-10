@@ -12,6 +12,8 @@
 #include "api_storagehandler.h"
 #include "api_mapviewer.h"
 #include "api_scatter3d.h"
+#include "api_chartviewer.h"
+#include "api_modelattitude.h"
 
 int main(int argc, char *argv[])
 {
@@ -32,6 +34,10 @@ int main(int argc, char *argv[])
     API_StorageHandler obj_StorageHandler;
     API_MapViewer obj_MapViewer;
     API_Scatter3D obj_Scatter3D;
+    API_ChartViewer obj_ChartViewerRangeAlt;
+    API_ChartViewer obj_ChartViewerAccel;
+    API_ChartViewer obj_ChartViewerGyro;
+    API_ModelAttitude obj_ModelAttitude;
 
 // connection between objects
     // koneksi ui ke Qt untuk fungsi quit
@@ -80,6 +86,10 @@ int main(int argc, char *argv[])
     // koneksi guiManager ke ui element
     QObject::connect(&obj_GUIManager, &API_GUIManager::update_UIMap, &obj_MapViewer, &API_MapViewer::receive_DataCoordinate);
     QObject::connect(&obj_GUIManager, &API_GUIManager::update_UIScatter, &obj_Scatter3D, &API_Scatter3D::receive_Data3DPosition);
+    QObject::connect(&obj_GUIManager, &API_GUIManager::update_UISpline1, &obj_ChartViewerRangeAlt, &API_ChartViewer::receive_DataSpline);
+    QObject::connect(&obj_GUIManager, &API_GUIManager::update_UISpline2, &obj_ChartViewerAccel, &API_ChartViewer::receive_DataSpline_3Data);
+    QObject::connect(&obj_GUIManager, &API_GUIManager::update_UISpline3, &obj_ChartViewerGyro, &API_ChartViewer::receive_DataSpline_3Data);
+    QObject::connect(&obj_GUIManager, &API_GUIManager::update_UIModel3D, &obj_ModelAttitude, &API_ModelAttitude::receive_Attitude);
 
 // binding c++ with qml
     viewer.rootContext()->setContextProperty("obj_MissionHandler",&obj_MissionHandler);
@@ -89,6 +99,10 @@ int main(int argc, char *argv[])
     viewer.rootContext()->setContextProperty("obj_DataLogHandler",&obj_DataLogHandler);
     viewer.rootContext()->setContextProperty("obj_MapViewer",&obj_MapViewer);
     viewer.rootContext()->setContextProperty("obj_Scatter3D",&obj_Scatter3D);
+    viewer.rootContext()->setContextProperty("obj_ChartViewerRangeAlt",&obj_ChartViewerRangeAlt);
+    viewer.rootContext()->setContextProperty("obj_ChartViewerAccel",&obj_ChartViewerAccel);
+    viewer.rootContext()->setContextProperty("obj_ChartViewerGyro",&obj_ChartViewerGyro);
+    viewer.rootContext()->setContextProperty("obj_ModelAttitude",&obj_ModelAttitude);
 
 // final set up
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);

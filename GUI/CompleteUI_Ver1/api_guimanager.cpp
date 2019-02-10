@@ -175,6 +175,7 @@ void API_GUIManager::update_UIAll()
         emit update_UILogF(AX_LOG_ID, temp_ax);
         emit update_UILogF(AY_LOG_ID, temp_ay);
         emit update_UILogF(AZ_LOG_ID, temp_az);
+        emit update_UISpline2(temp_ax,temp_ay,temp_az);
     }
     // Daya Gyro
     if ((static_cast<int>(temp_gx) != EMPTY_NUMBER)
@@ -183,5 +184,6 @@ void API_GUIManager::update_UIAll()
         emit update_UILogF(GX_LOG_ID, temp_gx);
         emit update_UILogF(GY_LOG_ID, temp_gy);
         emit update_UILogF(GZ_LOG_ID, temp_gz);
+        emit update_UISpline3(temp_gx,temp_gy,temp_gz);
     }
 }

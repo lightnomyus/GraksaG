@@ -13,5 +13,7 @@
         <file>Model3D.qml</file>
         <file>3D/garuda.stl</file>
         <file>3D/Payload.stl</file>
+        <file>Spline3AxisAccel.qml</file>
+        <file>Spline3AxisGyro.qml</file>
     </qresource>
 </RCC>

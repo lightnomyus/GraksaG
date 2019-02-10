@@ -26,7 +26,8 @@ SOURCES += \
     api_modelattitude.cpp \
     api_storagehandler.cpp \
     api_mapviewer.cpp \
-    api_scatter3d.cpp
+    api_scatter3d.cpp \
+    api_chartviewer.cpp
 
 RESOURCES += qml.qrc
 
@@ -53,4 +54,5 @@ HEADERS += \
     api_modelattitude.h \
     api_storagehandler.h \
     api_mapviewer.h \
-    api_scatter3d.h
+    api_scatter3d.h \
+    api_chartviewer.h
