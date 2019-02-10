@@ -18,6 +18,8 @@ int main(int argc, char *argv[])
 
 // connection between objects
     QObject::connect(&obj_TesterChartViewer,&Tester_ChartViewer::incoming_Data,&obj_ChartViewer,&API_ChartViewer::receive_DataSpline);
+    QObject::connect(&obj_TesterChartViewer,&Tester_ChartViewer::incoming_Data1,&obj_ChartViewer,&API_ChartViewer::receive_DataSpline_Time);
+    QObject::connect(&obj_TesterChartViewer,&Tester_ChartViewer::incoming_Data3,&obj_ChartViewer,&API_ChartViewer::receive_DataSpline_3Data);
 
 // binding c++ with qml
     viewer.rootContext()->setContextProperty("obj_ChartViewer",&obj_ChartViewer);

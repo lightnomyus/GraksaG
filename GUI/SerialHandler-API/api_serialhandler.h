@@ -1,7 +1,7 @@
 #ifndef API_SERIALHANDLER_H
 #define API_SERIALHANDLER_H
 
-#define BYTES_PER_READ 18
+#define BYTES_PER_READ 1
 
 #include <QSerialPort>
 #include <QSerialPortInfo>

@@ -20,8 +20,6 @@ Item {
             onClicked: {
                 id_SplineSeries.clear()
                 id_SplineSeries.add_zero = true
-                id_SplineSeries.add_degree = true
-                id_SplineSeries.name = qsTr("degree")
                 xAxis.min = 0
                 xAxis.max = 1
                 yAxis.min = 0
@@ -30,10 +28,21 @@ Item {
         }
 
         Button{
-            id: button_theme
+            id: button_lock
             height: parent.height
             width: 0.25*parent.width
             anchors.left: button_clear.right
+            text: qsTr("Lock")
+            onClicked: {
+                id_SplineSeries.name = qsTr("%1°").arg(obj_ChartViewer.get_launcAngle())
+            }
+        }
+
+        Button{
+            id: button_theme
+            height: parent.height
+            width: 0.25*parent.width
+            anchors.left: button_lock.right
             text: qsTr("Change Theme")
             onClicked: {
                 if (id_ChartViewer.theme == ChartView.ChartThemeLight) {
@@ -101,7 +110,6 @@ Item {
                 id: id_SplineSeries
                 name: qsTr("degree")
                 property bool add_zero: true
-                property bool add_degree: true
                 axisX: xAxis
                 axisY: yAxis
 
@@ -127,10 +135,6 @@ Item {
                 }
                 if (yAxis.min > y) {
                     yAxis.min = y-1
-                }
-                if (id_SplineSeries.add_degree) {
-                    id_SplineSeries.add_degree = false
-                    id_SplineSeries.name = qsTr("%1°").arg((180*(Math.atan(y/x))/(Math.PI)).toFixed(2))
                 }
                 id_SplineSeries.append(x,y)
             }
