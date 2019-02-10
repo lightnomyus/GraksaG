@@ -897,12 +897,12 @@ Rectangle{
                 Layout.rowSpan: 1
                 Layout.alignment: Qt.AlignRight
 
-                Scene3D{
-                    anchors.fill: parent
-                    Model3D{
-                        id: model_payload
-                    }
-                }
+//                Scene3D{
+//                    anchors.fill: parent
+//                    Model3D{
+//                        id: model_payload
+//                    }
+//                }
 
             }
 
