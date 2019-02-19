@@ -16,7 +16,8 @@ SOURCES += \
         main.cpp \
     api_protocolhandler.cpp \
     graksalink.c \
-    tester_protocolhandler.cpp
+    tester_protocolhandler.cpp \
+    graksastring.cpp
 
 RESOURCES += qml.qrc
 
@@ -34,4 +35,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     api_protocolhandler.h \
     graksalink.h \
-    tester_protocolhandler.h
+    tester_protocolhandler.h \
+    graksastring.h
