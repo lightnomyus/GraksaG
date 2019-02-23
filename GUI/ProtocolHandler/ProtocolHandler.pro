@@ -17,7 +17,9 @@ SOURCES += \
     api_protocolhandler.cpp \
     graksalink.c \
     tester_protocolhandler.cpp \
-    graksastring.cpp
+    graksastring.cpp \
+    api_graksastringparser.cpp \
+    tester_graksastringparser.cpp
 
 RESOURCES += qml.qrc
 
@@ -36,4 +38,6 @@ HEADERS += \
     api_protocolhandler.h \
     graksalink.h \
     tester_protocolhandler.h \
-    graksastring.h
+    graksastring.h \
+    api_graksastringparser.h \
+    tester_graksastringparser.h
