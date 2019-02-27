@@ -6,7 +6,7 @@
 #include "api_missionhandler.h"
 #include "api_terminal.h"
 #include "api_serialhandler.h"
-#include "api_protocolhandler.h"
+//#include "api_protocolhandler.h"
 #include "api_dataloghandler.h"
 #include "api_guimanager.h"
 #include "api_storagehandler.h"
@@ -14,6 +14,7 @@
 #include "api_scatter3d.h"
 #include "api_chartviewer.h"
 #include "api_modelattitude.h"
+#include "api_graksastringparser.h"
 
 int main(int argc, char *argv[])
 {
@@ -28,7 +29,8 @@ int main(int argc, char *argv[])
     API_Terminal obj_LogMission;
     API_Terminal obj_LogData;
     API_SerialHandler obj_SerialHandler;
-    API_ProtocolHandler obj_ProtocolHandler;
+//    API_ProtocolHandler obj_ProtocolHandler;
+    API_GraksaStringParser obj_GraksaStringParser;
     API_DataLogHandler obj_DataLogHandler;
     API_GUIManager obj_GUIManager;
     API_StorageHandler obj_StorageHandler;
@@ -60,11 +62,14 @@ int main(int argc, char *argv[])
     QObject::connect(&obj_SerialHandler,&API_SerialHandler::message_SerialHandler,&obj_LogMission,&API_Terminal::receive_Message);
 
     // koneksi SerialHandler ke ProtocolHandler untuk kirim byte
-    QObject::connect(&obj_SerialHandler,&API_SerialHandler::send_DataByte,&obj_ProtocolHandler,&API_ProtocolHandler::receive_DataByte);
+//    QObject::connect(&obj_SerialHandler,&API_SerialHandler::send_DataByte,&obj_ProtocolHandler,&API_ProtocolHandler::receive_DataByte);
+    QObject::connect(&obj_SerialHandler,&API_SerialHandler::send_DataByte,&obj_GraksaStringParser,&API_GraksaStringParser::receive_DataByte);
 
     // koneksi ProtocolHandler ke GUIManager untuk data accel dan gyro
-    QObject::connect(&obj_ProtocolHandler, &API_ProtocolHandler::send_DataAccel,&obj_GUIManager,&API_GUIManager::receive_DataAccel);
-    QObject::connect(&obj_ProtocolHandler, &API_ProtocolHandler::send_DataGyro,&obj_GUIManager,&API_GUIManager::receive_DataGyro);
+//    QObject::connect(&obj_ProtocolHandler, &API_ProtocolHandler::send_DataAccel,&obj_GUIManager,&API_GUIManager::receive_DataAccel);
+//    QObject::connect(&obj_ProtocolHandler, &API_ProtocolHandler::send_DataGyro,&obj_GUIManager,&API_GUIManager::receive_DataGyro);
+    QObject::connect(&obj_GraksaStringParser, &API_GraksaStringParser::send_DataAccel,&obj_GUIManager,&API_GUIManager::receive_DataAccel);
+    QObject::connect(&obj_GraksaStringParser, &API_GraksaStringParser::send_DataGyro,&obj_GUIManager,&API_GUIManager::receive_DataGyro);
 
     // koneksi GUIManager ke datalog handler untuk data float dan double
     QObject::connect(&obj_GUIManager, &API_GUIManager::update_UILogF, &obj_DataLogHandler,&API_DataLogHandler::receive_DataLogF);
