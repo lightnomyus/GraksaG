@@ -30,7 +30,9 @@ Rectangle{
             text: "\u274c"
             display: AbstractButton.TextBesideIcon
             icon.color: "Red"
-            onClicked: Qt.quit()
+            onClicked: {
+                Qt.quit()
+            }
 
         }
     }
@@ -897,12 +899,13 @@ Rectangle{
                 Layout.rowSpan: 1
                 Layout.alignment: Qt.AlignRight
 
-//                Scene3D{
-//                    anchors.fill: parent
-//                    Model3D{
-//                        id: model_payload
-//                    }
-//                }
+                Scene3D{
+                    id: scene3d_id
+                    anchors.fill: parent
+                    Model3D{
+                        id: model_payload
+                    }
+                }
 
             }
 
@@ -916,6 +919,7 @@ Rectangle{
                 Layout.alignment: Qt.AlignLeft
 
                 ScatterGraph{
+                    id: scatter3d_id
                     anchors.fill: parent
                 }
 
